@@ -170,7 +170,7 @@ $(document).ready(function() {
 
   $("#buybtc").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFloat(
       $("#amount-btc")
         .val()
         .trim()
@@ -181,7 +181,7 @@ $(document).ready(function() {
 
   $("#sellbtc").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFloat(
       $("#amount-btc2")
         .val()
         .trim()
@@ -192,7 +192,7 @@ $(document).ready(function() {
 
   $("#buyLTC").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFloat(
       $("#amount-ltc")
         .val()
         .trim()
@@ -203,7 +203,7 @@ $(document).ready(function() {
 
   $("#sellLTC").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFloat(
       $("#amount-ltc2")
         .val()
         .trim()
@@ -214,7 +214,7 @@ $(document).ready(function() {
 
   $("#buyEther").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFloat(
       $("#amount-eth")
         .val()
         .trim()
@@ -225,7 +225,7 @@ $(document).ready(function() {
 
   $("#sellEther").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFlaot(
       $("#amount-eth2")
         .val()
         .trim()
@@ -236,7 +236,7 @@ $(document).ready(function() {
 
   $("#buyXRP").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFloat(
       $("#amount-xrp")
         .val()
         .trim()
@@ -247,7 +247,7 @@ $(document).ready(function() {
 
   $("#sellXRP").on("click", function() {
     event.preventDefault();
-    var amount = parseInt(
+    var amount = parseFloat(
       $("#amount-xrp2")
         .val()
         .trim()
