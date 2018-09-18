@@ -19,10 +19,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  // User.associate = function(models) {
-  //   User.hasOne(models.Portfolio, {
-  //     onDelete: "cascade"
-  //   });
-  // };
+  User.associate = function(models) {
+    User.hasOne(models.Portfolio, {
+      onDelete: "cascade"
+    });
+  };
   return User;
 };

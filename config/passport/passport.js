@@ -1,5 +1,4 @@
 var bCrypt = require("bcrypt-nodejs");
-var newUserPort = require("../../helpers/newUserData");
 
 module.exports = function(passport, user) {
   var User = user;
@@ -42,7 +41,6 @@ module.exports = function(passport, user) {
                 return done(null, false);
               }
               if (newUser) {
-                Portfolio.create(newUserPort.newPortfolio);
                 return done(null, newUser);
               }
             });

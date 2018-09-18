@@ -48,15 +48,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  // Portfolio.associate = function(models) {
-  //   // We're saying that each portfolio should belong to a user
-  //   // A portfolio can't be created without a user due to the foreign key constraint
-  //   Portfolio.belongsTo(models.User, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // };
+  Portfolio.associate = function(models) {
+    // We're saying that each portfolio should belong to a user
+    // A portfolio can't be created without a user due to the foreign key constraint
+    Portfolio.belongsTo(models.user, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
 
   return Portfolio;
 };
