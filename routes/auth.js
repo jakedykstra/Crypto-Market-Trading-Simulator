@@ -8,10 +8,25 @@ module.exports = function(app, passport) {
   app.get("/dashboard", isLoggedIn, authController.dashboard);
 
   app.post(
-    "/login",
+    "/login/signup",
     // checker for submit button - signup vs signin
     // if signup
     passport.authenticate("local-signup", {
+      successRedirect: "/dashboard",
+      failureRedirect: "/login"
+    })
+    // if signin
+    //   passport.authenticate('local-signin', {
+    //     successRedirect: '/dashboard',
+    //     failureRedirect: '/signin'
+    // }
+  );
+
+  app.post(
+    "/login/signin",
+    // checker for submit button - signup vs signin
+    // if signup
+    passport.authenticate("local-signin", {
       successRedirect: "/dashboard",
       failureRedirect: "/login"
     })
