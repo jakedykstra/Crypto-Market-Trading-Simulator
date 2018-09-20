@@ -3,6 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor({children}){
+    super({children});
+
+    this.state = { 
+      selectedGraph: null,
+      cryptoBuy: null,
+      cryptoSell: null,
+      portfolio: [],
+      tradeHistory: [],
+      SelectSignInOrUp: null
+     }
+  }
   render() {
     return (
       <div className="App">
@@ -12,6 +24,7 @@ class App extends Component {
         </header>
         <p className="App-intro">
         </p>
+        {Welcome = sign}
       </div>
     );
   }
