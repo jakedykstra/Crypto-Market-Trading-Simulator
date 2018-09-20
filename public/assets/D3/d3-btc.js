@@ -9,7 +9,7 @@
                 })
                 .then(function (data) {
                     var parsedData = parseData(data)
-                    console.log(parseData);
+                    console.log(parsedData);
                     console.log(data);
                     drawChart(parsedData);
                 })

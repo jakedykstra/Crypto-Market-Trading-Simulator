@@ -1,5 +1,13 @@
 //User profile
-//TODO: figure out how to pull specific user data
+// TODO: figure out how to pull specific user data
+// TODO: get user table going and begin using sequalize to build out routes with info we will need
+// INFO Needed:
+// cryptodato, should be on it's own
+// users portfolio data + way to implement users id into url here
+// user buying history (might need a table for this)
+// update user portfolio, user buying history (could even have a graph charting buying history?)
+
+//
 
 //Pulls from API and saves prices. Calls reAvaluate function to start off
 function apiCallToCrypto() {
@@ -27,6 +35,11 @@ $.get("api/user/userId", function(data) {
   return userPort;
 });
 
+$.get("api/tradeHistory", function(data) {
+  var history = data.history;
+  //save all the history to the tables below
+});
+
 function updateDatabase(userPort) {
   $.ajax({
     method: "PUT",
@@ -34,3 +47,7 @@ function updateDatabase(userPort) {
     data: userPort
   });
 }
+
+// function updateUserHistory(userHistory) {
+//   $.post("/api/user/portfolio", function(data) {});
+// }

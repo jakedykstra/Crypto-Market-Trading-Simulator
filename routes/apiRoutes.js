@@ -1,26 +1,49 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
-    });
+  // TODO:
+  // send userdata
+  // send userPort
+  // update userPort
+  // push to tradeHistory
+  // push to userTradeHistory
+
+  // should be able to access username/userId/portfolio/history from this
+  app.get("/api/user/:id", function(req, res) {
+    db.user
+      .findOne({
+        where: {
+          id: req.params.id
+        },
+        include: [db.Portfolio]
+      })
+      .then(function(user) {
+        res.json(user);
+      });
   });
 
-  // Create a new example
-  app.post("/tradeHistory", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  // need to send all relavent data for storing to db with proper naming
+  function pushToHistoryToDb(
+    crypto,
+    usdAmount,
+    coinAmount,
+    transactionType,
+    objCrypto
+  ) {
+    data = arguments;
+    console.log("Here we have the arguments data" + data);
+    app.post("/api/tradeHistory", function(req, res) {
+      db.tradeHistory.create(data).then(function(historyData) {
+        req.json(historyData);
+        console.log("history data for us to pick apart" + historyData);
+        return historyData;
+      });
     });
-  });
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.json(dbExample);
+  }
+  // need to send all relavent data for storing to db with proper naming
+  app.post("/api/user/tradeHistory", function(req, res) {
+    db.userTradeHistory.create(arguments).then(function(userHistoryData) {
+      res.json(userHistoryData);
     });
   });
 };

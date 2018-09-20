@@ -144,27 +144,30 @@ function reAvaluate() {
   updateDatabase();
 }
 
-// function tradeHistoryDb(...args) {
-//   args.usdAmount = Math.round(usdAmount * 100) / 100;
-//   args.coinAmount = Math.round(coinAmount * 100) / 100;
-//   // setting variables from inputs
-//   $.post("/api/tradeHistory", args)
+//TODO: figure out why spread isn't working
 
-// $.get("/api/tradeHistory", function(data){
+function tradeHistoryDb(crypto, usdAmount, coinAmount, transactionType, objCrypto) {
+  usdAmount = Math.round(usdAmount * 100) / 100;
+  coinAmount = Math.round(coinAmount * 100) / 100;
+  // setting variables from inputs
+  pushToHistoryToDb(arguments);
+$.post("/api/tradeHistory", arguments)
 
-//   var newRow = $("<tr>").append(
-//     $("<td>").text(data.id),
-//     $("<td>").text(data.cryptoType),
-//     $("<td>").text("$" + data.coinPrice),
-//     $("<td>").text(data.coinAmount),
-//     $("<td>").text("$" + data.usdAmount),
-//     $("<td>").text(data.tradeType)
-//   );
+$.get("/api/tradeHistory", function(data){
 
-//        // Append the new row to the table
-//   $(".body").prepend(newRow);
-// }
-// }
+  var newRow = $("<tr>").append(
+    $("<td>").text(data.id),
+    $("<td>").text(data.cryptoType),
+    $("<td>").text("$" + data.coinPrice),
+    $("<td>").text(data.coinAmount),
+    $("<td>").text("$" + data.usdAmount),
+    $("<td>").text(data.tradeType)
+  );
+
+       // Append the new row to the table
+  $(".body").prepend(newRow);
+}
+}
 
 $("#buybtc").on("click", function() {
   event.preventDefault();
