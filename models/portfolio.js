@@ -5,17 +5,17 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       default: 10000
     },
-    USD: {//up to 8, maybe 9?
+    USD: {
       type: DataTypes.FLOAT,
       allowNull: false,
       default: 10000
     },
-    BTC: {//float in db for all crypto 
+    BTC: {
       type: DataTypes.FLOAT,
       allowNull: false,
       default: 0
     },
-    BTCVal: {//auto rounds 2 places
+    BTCVal: {
       type: DataTypes.FLOAT,
       default: 0
     },
