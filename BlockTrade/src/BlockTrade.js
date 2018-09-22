@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './BlockTrade.css';
 import './src/amountinput.js';
 import User from './src/UserData';
 
@@ -10,3 +10,5 @@ class BlockTrade extends React.Component {
     )
   }
 };
+
+module.exports(BlockTrade);

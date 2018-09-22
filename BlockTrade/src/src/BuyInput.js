@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 const typeNames = {
     b: 'Bitcoin',
     l: 'Litecoin',

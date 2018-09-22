@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
-import './src/amountinput.js';
 
 class TradeCategoryRow extends React.Component {
   render() {
@@ -27,8 +25,8 @@ class TradeRow extends React.Component {
       <td>{trade.usd}</td>
       <td>{trade.type}</td>
     </tr>
-  )
-}
+    )
+  }
 }
 
 class TradeHistoryTable extends React.Component {
