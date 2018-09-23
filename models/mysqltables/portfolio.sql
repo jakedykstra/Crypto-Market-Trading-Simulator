@@ -14,5 +14,7 @@ xrp float(12,2) not null,
 xrp_val float(12,2),
 ltc float(12,2) not null,
 ltc_val float(12,2),
+ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+dt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 primary key(id)
 ); 
