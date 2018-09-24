@@ -35,7 +35,7 @@ module.exports = function(passport, user) {
           return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
         };
 
-        User.findOne({
+        db.User.findOne({
           where: {
             email: email
           }
@@ -52,7 +52,7 @@ module.exports = function(passport, user) {
               password: userPassword
             };
 
-            User.create(data).then(function(newUser) {
+            db.User.create(data).then(function(newUser) {
               if (!newUser) {
                 return done(null, false);
               }
@@ -83,7 +83,7 @@ module.exports = function(passport, user) {
           return bCrypt.compareSync(password, userpass);
         };
 
-        User.findOne({
+        db.User.findOne({
           where: {
             email: email
           }

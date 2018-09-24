@@ -30,7 +30,7 @@ $.get("api/user", function(data) {
   return userId;
 });
 
-$.get("api/user/userId", function(data) {
+$.get("api/user/" + userId, function(data) {
   var userPort = data.Porfolio;
   return userPort;
 });
