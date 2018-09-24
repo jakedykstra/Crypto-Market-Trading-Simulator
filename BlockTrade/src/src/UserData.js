@@ -1,73 +1,6 @@
 import React, { Component } from 'react';
 
-class TradeCategoryRow extends React.Component {
-  render() {
-    const category = this.props.category;
-    return (
-      <tr>
-        <th colSpan='2'>
-        {category}
-        </th>
-      </tr>
-    );
-  }
-}
-
-class TradeRow extends React.Component {
-  render() {
-    const trade = this.props.trade;
-    return (
-    <tr>
-      <td>{trade.transaction}</td>
-      <td>{trade.currency}</td>
-      <td>{trade.price}</td>
-      <td>{trade.quantity}</td>
-      <td>{trade.usd}</td>
-      <td>{trade.type}</td>
-    </tr>
-    )
-  }
-}
-
-class TradeHistoryTable extends React.Component {
-  render() {
-    const rows = [];
-    let lastCategory = null;
-
-    this.props.trades.forEach((trade) => {
-      if (trades.category !== lastCategory) {
-        rows.push(
-          <TradeCategoryRow
-            category={trade.category}
-            key={trade.category} />
-        );
-      }
-      rows.push(
-        <TradeRow
-          trade={trade}
-          key={trade.name} />
-      );
-      lastCategory = trade.category;
-    });
-
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Transaction</th>
-            <th>Currency</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Fiat (USD)</th>
-            <th>Trade Type</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
-    );
-  }
-}
-
+// displays the user's investments in ea crypto
 class Investments extends React.Component {
   render() {
     const investment = this.props.investment;
@@ -84,6 +17,7 @@ class Investments extends React.Component {
   }
 }
 
+// displays the user's cash and net funds
 class Balance extends React.Component {
   render() {
     const balance = this.props.balance;
@@ -98,83 +32,38 @@ class Balance extends React.Component {
   }
 };
 
-class TradeInput extends React.Component{
-  render() {
-    const crypto = this.props.crypto;
-    return(
-    <form onSubmit={crypto}>
-      <label>
-        Buy Amount
-      </label>
-        <input
-          name="buyAmount"
-          type="number"
-
-        />    
-    </form>
-    )
-  };
-}
-
-class TradeInputTable extends React.Component{
-  render() {
-    const inputs = [];
-    let lastCrypto = null;
-
-    this.props.cryptos.forEach((crypto) => {
-      if (trades.inputs !== lastCrypto) {
-        inputs.push(
-          <TradeInput
-            trade={crypto}
-            key={crypto} />
-        );
-      }
-      inputs.push(
-        <TradeInput
-        trade={crypto}
-        key={crypto} />
-      );
-    })
-      return(
-        <div>{inputs}</div>
-      );
-  }
-};
-
-class Trade extends React.Component {
-  render() {
-    return(
-      <TradeInputTable />
-    )
-  }
-};
-
+// displays the user's balance, investments, and trade history as one html element
 class Account extends React.Component {
   render() {
     return(
       <div>
         <Balance />
         <Investments />
-        <TradeHistoryTable />
       </div>
-    )
+    );
   }
-};
+}
 
-class UserData extends Component {
-  
+// takes in the trade and account modules ands sets the data that they will use
+class UserData extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user:[],
+      history:[]
+    }
+  fetch('/userdata')
+        .then(res => res.json())
+        .then(user => this.setState({user}))
+  }
   render() {
     return( 
-    <div>
-      <Trade 
-    
-      />
       <Account 
-      
+        category={this.state.user.category}
+        balance={this.state.user.balance}
       />
-    </div>
     )
   };
 }
 
-module.exports(UserData)
+module.exports(UserData);

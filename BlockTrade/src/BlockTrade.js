@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import './BlockTrade.css';
-import './src/amountinput.js';
-import User from './src/UserData';
+import UserData from './src/UserData';
+import Trade from './src/Trades';
+import TradeHistoryTable from './src/TradeHistoryTable';
 
 class BlockTrade extends React.Component {
   render() {
     return(
-    <User />
+    
+    <div>
+      <UserData />
+    
+   
+      <Trade />
+    
+    
+      <TradeHistoryTable />
+    </div>
     )
   }
 };
