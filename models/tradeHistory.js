@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var TradeHistory = sequelize.define("tradeHistory", {
+  var tradeHistory = sequelize.define("tradeHistory", {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -20,7 +20,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     cryptoType: {
       type: DataTypes.STRING
-    }
+    },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   });
-  return TradeHistory;
+  return tradeHistory;
 };

@@ -1,7 +1,7 @@
 //User starting portfolio
 
-module.exports = function() {
-  var newPortfolio = {
+module.exports = {
+  newPortfolio: {
     totalNet: 100000,
     USD: 100000,
     BTC: 0,
@@ -12,6 +12,5 @@ module.exports = function() {
     XRPVal: null,
     LTC: 0,
     LTCVal: null
-  };
-  console.log(newPortfolio);
+  }
 };

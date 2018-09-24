@@ -3,16 +3,19 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
 
-  app.get("/", function(req, res) {
-    res.render("splash");
-  });
+  // app.get("/", function(req, res) {
+  //   res.render("splash");
+  // });
 
-  app.get("/login", function(req, res) {
-    res.render("login");
-  });
+  // app.get("/login", function(req, res) {
+  //   res.render("login");
+  // });
 
   app.get("/dashboard", function(req, res) {
-    res.render("dashboard");
+    db.Portfolio.create(req.user).then(function(dbPortfolio) {
+      console.log("portfolio-----" + dbPortfolio);
+      res.json(dbPortfolio);
+    });
   });
 
   // app.get("/", function(req, res) {

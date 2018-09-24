@@ -1,13 +1,8 @@
 //Variables place holders for current prices.
-var bitcoinPrice;
-var ethereumPrice;
-var litecoinPrice;
-var ripplePrice;
 
 // $("#getStarted").on("click", function() {
 //   $.get()
 // });
-apiCallToCrypto();
 
 //buyCrypto function
 //1. Checks if input is a valid number and not a letter
@@ -28,7 +23,7 @@ function buyCrypto(amount, crypto, objCrypto) {
       userPort.USD -= amount;
       userPort[objCrypto] += totalAmount;
     }
-    reAvaluate();
+    reAvaluate(userPort);
     console.log(userPort);
     tradeHistoryDb(crypto, amount, totalAmount, "Buy", objCrypto);
     apiCallToCrypto();
@@ -64,7 +59,7 @@ function sellCrypto(amount, crypto, objCrypto) {
 //1. Calculates USD value of current holdings
 //2. Updates user profile with USD value and holdings
 //3. Updates current price for coins
-function reAvaluate() {
+function reAvaluate(userPort) {
   userPort.BTCVal = userPort.BTC * bitcoinPrice;
   userPort.LTCVal = userPort.LTC * litecoinPrice;
   userPort.ETHVal = userPort.ETH * ethereumPrice;
@@ -137,36 +132,37 @@ function reAvaluate() {
     })
   );
 
-  $("#jqueryBTC").text(Math.floor(bitcoinPrice).toLocaleString("en"));
-  $("#jqueryLTC").text(litecoinPrice.toLocaleString("en"));
-  $("#jqueryEther").text(ethereumPrice.toLocaleString("en"));
-  $("#jqueryXRP").text(ripplePrice.toLocaleString("en"));
-  updateDatabase();
+  updateDatabase(userPort);
 }
 
-//TODO: figure out why spread isn't working
+//TODO: Make sure this works
 
-function tradeHistoryDb(crypto, usdAmount, coinAmount, transactionType, objCrypto) {
+function tradeHistoryDb(
+  crypto,
+  usdAmount,
+  coinAmount,
+  transactionType,
+  objCrypto
+) {
   usdAmount = Math.round(usdAmount * 100) / 100;
   coinAmount = Math.round(coinAmount * 100) / 100;
   // setting variables from inputs
-  pushToHistoryToDb(arguments);
-$.post("/api/tradeHistory", arguments)
+  $.post("/api/tradeHistory", arguments);
 
-$.get("/api/tradeHistory", function(data){
+  $.get("/api/tradeHistory", function(data) {
+    console.log("trade history data in database" + data);
+    var newRow = $("<tr>").append(
+      $("<td>").text(data.id),
+      $("<td>").text(data.cryptoType),
+      $("<td>").text("$" + data.coinPrice),
+      $("<td>").text(data.coinAmount),
+      $("<td>").text("$" + data.usdAmount),
+      $("<td>").text(data.tradeType)
+    );
+  });
 
-  var newRow = $("<tr>").append(
-    $("<td>").text(data.id),
-    $("<td>").text(data.cryptoType),
-    $("<td>").text("$" + data.coinPrice),
-    $("<td>").text(data.coinAmount),
-    $("<td>").text("$" + data.usdAmount),
-    $("<td>").text(data.tradeType)
-  );
-
-       // Append the new row to the table
+  // Append the new row to the table
   $(".body").prepend(newRow);
-}
 }
 
 $("#buybtc").on("click", function() {

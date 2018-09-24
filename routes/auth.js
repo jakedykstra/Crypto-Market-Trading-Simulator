@@ -3,38 +3,30 @@ var authController = require("../controllers/authcontroller.js");
 module.exports = function(app, passport) {
   app.get("/login", authController.login);
 
+  app.get("/signup", authController.signup);
+
   app.get("/logout", authController.logout);
 
   app.get("/dashboard", isLoggedIn, authController.dashboard);
 
   app.post(
-    "/login/signup",
+    "/signup",
     // checker for submit button - signup vs signin
     // if signup
     passport.authenticate("local-signup", {
       successRedirect: "/dashboard",
       failureRedirect: "/login"
     })
-    // if signin
-    //   passport.authenticate('local-signin', {
-    //     successRedirect: '/dashboard',
-    //     failureRedirect: '/signin'
-    // }
   );
 
   app.post(
-    "/login/signin",
+    "/login",
     // checker for submit button - signup vs signin
-    // if signup
+    // if signin
     passport.authenticate("local-signin", {
       successRedirect: "/dashboard",
       failureRedirect: "/login"
     })
-    // if signin
-    //   passport.authenticate('local-signin', {
-    //     successRedirect: '/dashboard',
-    //     failureRedirect: '/signin'
-    // }
   );
 
   //middleware for checking whether the user is logged in
