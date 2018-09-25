@@ -78,12 +78,12 @@ class SiteHistory extends React.Component {
     this.state = {
       history:[]
     }
-      fetch('/sitehistory')
-      .then(res => res.json())
-      .then(history => this.setState({history}))
-    
-  }
-
+      fetch('http://localhost:3000/api/tradehistory')
+        .then(res => {
+          const history = res.json()
+          this.setState({history});
+        })    
+      }
   render() {
     return( 
       <TradeHistoryTable

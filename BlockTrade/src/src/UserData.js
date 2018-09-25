@@ -50,11 +50,13 @@ class UserData extends React.Component {
     super(props);
     this.state = {
       user:[],
-      history:[]
+      
     }
-  fetch('/userdata')
-        .then(res => res.json())
-        .then(user => this.setState({user}))
+  fetch('http://localhost:3000/api/user') 
+      .then(res => {
+        const user = res.json()
+        this.setState({user});
+  })  
   }
   render() {
     return( 
