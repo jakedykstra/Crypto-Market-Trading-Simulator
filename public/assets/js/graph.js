@@ -29,7 +29,6 @@ $("#graphButtonContainer button").on("click", function() {
       .then(function(data) {
         var parsedData = parseData(data);
         console.log(parseData);
-        console.log(data);
         drawChart(parsedData);
       });
   }
@@ -46,7 +45,6 @@ $("#graphButtonContainer button").on("click", function() {
   }
 
   function drawChart(data) {
-    console.log(data);
     var svgWidth = 600,
       svgHeight = 400;
     var margin = {

@@ -1,9 +1,3 @@
-//Variables place holders for current prices.
-
-// $("#getStarted").on("click", function() {
-//   $.get()
-// });
-
 //buyCrypto function
 //1. Checks if input is a valid number and not a letter
 //2. Calculates Total Amount
@@ -60,6 +54,7 @@ function sellCrypto(amount, crypto, objCrypto) {
 //2. Updates user profile with USD value and holdings
 //3. Updates current price for coins
 function reAvaluate(userPort) {
+  console.log(userPort);
   userPort.BTCVal = userPort.BTC * bitcoinPrice;
   userPort.LTCVal = userPort.LTC * litecoinPrice;
   userPort.ETHVal = userPort.ETH * ethereumPrice;
@@ -71,6 +66,7 @@ function reAvaluate(userPort) {
     userPort.LTCVal +
     userPort.XRPVal;
 
+  // Places the user purchased text into the user field
   $("#jqueryUSD").text(
     userPort.USD.toLocaleString(undefined, {
       minimumFractionDigits: 2,

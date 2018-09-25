@@ -12,7 +12,7 @@ module.exports = function(app) {
     res.json(req.user);
   });
 
-  app.get("/api/newPort", function(req, res) {
+  app.get("/api/newPort/:userId", function(req, res) {
     db.Portfolio.create({
       totalNet: 100000,
       USD: 100000,
@@ -23,10 +23,11 @@ module.exports = function(app) {
       XRP: 0,
       XRP_Val: 0,
       LTC: 0,
-      LTC_Val: 0
+      LTC_Val: 0,
+      UserId: req.params.userId
     }).then(function(dbPortfolio) {
       console.log("portfolio-----" + dbPortfolio);
-      res(dbPortfolio);
+      res.json(dbPortfolio);
     });
   });
 
@@ -34,7 +35,7 @@ module.exports = function(app) {
   app.get("/api/user/:id", function(req, res) {
     db.Portfolio.findOne({
       where: {
-        id: req.params.id
+        UserId: req.params.id
       },
       include: [db.User]
     }).then(function(portfolio) {

@@ -44,8 +44,10 @@ $.get("api/user", function(data) {
 
 // get request where backend will create a portfolio and send the new data
 function createPort(userId) {
-  $.get("api/newPort", function(data) {
-    console.log(data);
+  $.get(`api/newPort/${userId}`, function(data) {
+    console.log(" createPort user portfolio data " + data);
+    var userPort = $.getJSON(data)
+    reAvaluate(userPort);
   });
 }
 
@@ -54,14 +56,26 @@ function userPortfolio(userId) {
   $.get("api/user/" + userId, function(data) {
     console.log(data);
     var userPort = data;
+    console.log(userPort);
     if (!userPort) {
       createPort(userId);
     } else {
-      console.log(userPort);
+      console.log(" user portfolio for users who already have" + userPort);
       return reAvaluate(userPort);
     }
   });
 }
+
+// get request where backend will create a portfolio and send the new data
+// function createPort(userId) {
+//   $.get(`api/newPort/${userId}`, function(data) {
+//     console.log(" createPort user portfolio data " + data);
+//     var userPort = $.getJSON(data).then(function (data) {
+//         reAvaluate(data);      
+//     })
+//   });
+// }
+
 
 // updates portfolio with new data based on recent buy. Function is called after buy/sell functionality
 function updateDatabase(userPort) {
