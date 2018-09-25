@@ -137,34 +137,6 @@ function reAvaluate(userPort) {
 
 //TODO: Make sure this works
 
-function tradeHistoryDb(
-  crypto,
-  usdAmount,
-  coinAmount,
-  transactionType,
-  objCrypto
-) {
-  usdAmount = Math.round(usdAmount * 100) / 100;
-  coinAmount = Math.round(coinAmount * 100) / 100;
-  // setting variables from inputs
-  $.post("/api/tradeHistory", arguments);
-
-  $.get("/api/tradeHistory", function(data) {
-    console.log("trade history data in database" + data);
-    var newRow = $("<tr>").append(
-      $("<td>").text(data.id),
-      $("<td>").text(data.cryptoType),
-      $("<td>").text("$" + data.coinPrice),
-      $("<td>").text(data.coinAmount),
-      $("<td>").text("$" + data.usdAmount),
-      $("<td>").text(data.tradeType)
-    );
-  });
-
-  // Append the new row to the table
-  $(".body").prepend(newRow);
-}
-
 $("#buybtc").on("click", function() {
   event.preventDefault();
   var amount = parseFloat(

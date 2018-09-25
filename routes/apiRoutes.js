@@ -12,7 +12,7 @@ module.exports = function(app) {
     res.json(req.user);
   });
 
-  app.post("/api/newPort", function(req, res) {
+  app.get("/api/newPort", function(req, res) {
     db.Portfolio.create({
       totalNet: 100000,
       USD: 100000,
@@ -26,6 +26,7 @@ module.exports = function(app) {
       LTC_Val: 0
     }).then(function(dbPortfolio) {
       console.log("portfolio-----" + dbPortfolio);
+      res(dbPortfolio);
     });
   });
 
@@ -52,6 +53,11 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/tradeHistory", function(req, res) {
+    db.tradeHistory.findAll().then(function(historyData) {
+      res.json(historyData);
+    });
+  });
   // collects data passed in and saves to database's tradehistory table
   app.post("/api/tradeHistory", function(req, res) {
     db.tradeHistory.create(req.body).then(function(historyData) {

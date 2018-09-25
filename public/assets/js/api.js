@@ -34,30 +34,7 @@ function tradeRate(bitcoinPrice, ethereumPrice, ripplePrice, litecoinPrice) {
 }
 apiCallToCrypto();
 
-var newPortfolio = {
-  totalNet: 100000,
-  USD: 100000,
-  BTC: 0,
-  BTC_Val: 0,
-  ETH: 0,
-  ETHVal: 0,
-  XRP: 0,
-  XRP_Val: 0,
-  LTC: 0,
-  LTC_Val: 0
-};
-
-function createPort(userId) {
-  $.ajax({
-    method: "POST",
-    url: "api/newPort",
-    data: newPortfolio
-  });
-
-  // userPortfolio(userId);
-}
-
-// gets our users id TODO: find other way to capture
+// gets our users id
 $.get("api/user", function(data) {
   console.log(data);
   var userId = data.id;
@@ -65,12 +42,20 @@ $.get("api/user", function(data) {
   userPortfolio(userId);
 });
 
+// get request where backend will create a portfolio and send the new data
+function createPort(userId) {
+  $.get("api/newPort", function(data) {
+    console.log(data);
+  });
+}
+
+// function pulls portfolio data so we can render to the screen. If there is not portfolio data on user then we will call createPort to create one
 function userPortfolio(userId) {
   $.get("api/user/" + userId, function(data) {
     console.log(data);
     var userPort = data;
     if (!userPort) {
-      createPort(newPortfolio, userId);
+      createPort(userId);
     } else {
       console.log(userPort);
       return reAvaluate(userPort);
@@ -78,12 +63,60 @@ function userPortfolio(userId) {
   });
 }
 
+// updates portfolio with new data based on recent buy. Function is called after buy/sell functionality
 function updateDatabase(userPort) {
   $.ajax({
     method: "PUT",
     url: "/api/user/updatePortfolio",
     data: userPort
   });
+}
+
+// getting original tradeHistory data to populate
+$.get("/api/tradeHistory", function(data) {
+  // for each to seperate out data
+  for(let rows in data){
+  var newRow = $("<tr>").append(
+    $("<td>").text(rows.id),
+    $("<td>").text(rows.cryptoType),
+    $("<td>").text("$" + rows.coinPrice),
+    $("<td>").text(rows.coinAmount),
+    $("<td>").text("$" + rows.usdAmount),
+    $("<td>").text(rows.tradeType)
+  );
+  };
+});
+
+// function for adding to the database history
+function tradeHistoryDb(
+  crypto,
+  usdAmount,
+  coinAmount,
+  transactionType,
+  objCrypto
+) {
+  usdAmount = Math.round(usdAmount * 100) / 100;
+  coinAmount = Math.round(coinAmount * 100) / 100;
+  // setting variables from inputs
+  console.log(arguments);
+  // posting data to db
+  $.post("/api/tradeHistory", arguments);
+
+  // getting db data and placing in history
+  $.get("/api/tradeHistory", function(data) {
+    console.log("trade history data in database" + data);
+    var newRow = $("<tr>").append(
+      $("<td>").text(data.id),
+      $("<td>").text(data.cryptoType),
+      $("<td>").text("$" + data.coinPrice),
+      $("<td>").text(data.coinAmount),
+      $("<td>").text("$" + data.usdAmount),
+      $("<td>").text(data.tradeType)
+    );
+  });
+
+  // Append the new row to the table
+  $(".body").prepend(newRow);
 }
 
 // function updateUserHistory(userHistory) {
