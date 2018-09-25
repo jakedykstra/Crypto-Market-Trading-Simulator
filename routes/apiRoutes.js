@@ -14,16 +14,16 @@ module.exports = function(app) {
 
   app.get("/api/newPort/:userId", function(req, res) {
     db.Portfolio.create({
-      totalNet: 100000,
-      USD: 100000,
-      BTC: 0,
-      BTC_Val: 0,
-      ETH: 0,
-      ETHVal: 0,
-      XRP: 0,
-      XRP_Val: 0,
-      LTC: 0,
-      LTC_Val: 0,
+      totalNet: 100000.0,
+      USD: 100000.0,
+      BTC: 0.0,
+      BTC_Val: 0.0,
+      ETH: 0.0,
+      ETHVal: 0.0,
+      XRP: 0.0,
+      XRP_Val: 0.0,
+      LTC: 0.0,
+      LTC_Val: 0.0,
       UserId: req.params.userId
     }).then(function(dbPortfolio) {
       console.log("portfolio-----" + dbPortfolio);

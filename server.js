@@ -3,6 +3,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var exphbs = require("express-handlebars");
+var path = require("path");
 // modules needed for passport user auth
 var passport = require("passport");
 var session = require("express-session");

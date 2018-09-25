@@ -6,22 +6,27 @@
 // users portfolio data + way to implement users id into url here
 // user buying history (might need a table for this)
 // update user portfolio, user buying history (could even have a graph charting buying history?)
+coinPrice = {
+  bitcoinPrice: '',
+  ethereumPrice: '',
+  litecoinPrice: '',
+  ripplePrice: ''
+}
 
-var bitcoinPrice;
-var ethereumPrice;
-var litecoinPrice;
-var ripplePrice;
+//TODO: 353535
+
+var userPort;
 
 //Pulls from API and saves prices. Calls reAvaluate function to start off
 function apiCallToCrypto() {
   jQuery.getJSON(
     "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD",
     function(data) {
-      bitcoinPrice = data.RAW.BTC.USD.PRICE;
-      ethereumPrice = data.RAW.ETH.USD.PRICE;
-      ripplePrice = data.RAW.XRP.USD.PRICE;
-      litecoinPrice = data.RAW.LTC.USD.PRICE;
-      tradeRate(bitcoinPrice, ethereumPrice, ripplePrice, litecoinPrice);
+      coinPrice.bitcoinPrice = data.RAW.BTC.USD.PRICE;
+      coinPrice.ethereumPrice = data.RAW.ETH.USD.PRICE;
+      coinPrice.ripplePrice = data.RAW.XRP.USD.PRICE;
+      coinPrice.litecoinPrice = data.RAW.LTC.USD.PRICE;
+      return tradeRate(coinPrice.bitcoinPrice, coinPrice.ethereumPrice, coinPrice.ripplePrice, coinPrice.litecoinPrice);
     }
   );
 }
@@ -48,7 +53,10 @@ function createPort(userId) {
     console.log(" createPort user portfolio data " + data);
     var userPort = $.getJSON(data)
     reAvaluate(userPort);
+    return userPort;
   });
+  console.log(userPort);
+  return userPort;
 }
 
 // function pulls portfolio data so we can render to the screen. If there is not portfolio data on user then we will call createPort to create one
@@ -60,10 +68,12 @@ function userPortfolio(userId) {
     if (!userPort) {
       createPort(userId);
     } else {
-      console.log(" user portfolio for users who already have" + userPort);
-      return reAvaluate(userPort);
-    }
+      console.log(userPort);
+      reAvaluate(userPort);
+      return userPort;
+    } 
   });
+  return userPort;
 }
 
 // get request where backend will create a portfolio and send the new data

@@ -55,16 +55,17 @@ function sellCrypto(amount, crypto, objCrypto) {
 //3. Updates current price for coins
 function reAvaluate(userPort) {
   console.log(userPort);
-  userPort.BTCVal = userPort.BTC * bitcoinPrice;
-  userPort.LTCVal = userPort.LTC * litecoinPrice;
-  userPort.ETHVal = userPort.ETH * ethereumPrice;
-  userPort.XRPVal = userPort.XRP * ripplePrice;
+  console.log(coinPrice.bitcoinPrice);
+  userPort.BTC_Val = userPort.BTC * coinPrice.bitcoinPrice;
+  userPort.LTC_Val = userPort.LTC * coinPrice.litecoinPrice;
+  userPort.ETHVal = userPort.ETH * coinPrice.ethereumPrice;
+  userPort.XRP_Val = userPort.XRP * coinPrice.ripplePrice;
   userPort.totalNet =
-    userPort.BTCVal +
+    userPort.BTC_Val +
     userPort.ETHVal +
     userPort.USD +
-    userPort.LTCVal +
-    userPort.XRPVal;
+    userPort.LTC_Val +
+    userPort.XRP_Val;
 
   // Places the user purchased text into the user field
   $("#jqueryUSD").text(
@@ -86,7 +87,7 @@ function reAvaluate(userPort) {
     })
   );
   $("#BTCVal").text(
-    userPort.BTCVal.toLocaleString(undefined, {
+    userPort.BTC_Val.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     })
@@ -98,7 +99,7 @@ function reAvaluate(userPort) {
     })
   );
   $("#LTCVal").text(
-    userPort.LTCVal.toLocaleString(undefined, {
+    userPort.LTC_Val.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     })
@@ -122,13 +123,14 @@ function reAvaluate(userPort) {
     })
   );
   $("#XRPVal").text(
-    userPort.XRPVal.toLocaleString(undefined, {
+    userPort.XRP_Val.toLocaleString(undefined, {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2
     })
   );
 
   updateDatabase(userPort);
+  return userPort;
 }
 
 //TODO: Make sure this works
@@ -140,7 +142,7 @@ $("#buybtc").on("click", function() {
       .val()
       .trim()
   );
-  buyCrypto(amount, bitcoinPrice, "BTC");
+  buyCrypto(amount, coinPrice.bitcoinPrice, "BTC");
   $("#amount-btc").val("");
 });
 
@@ -151,7 +153,7 @@ $("#sellbtc").on("click", function() {
       .val()
       .trim()
   );
-  sellCrypto(amount, bitcoinPrice, "BTC");
+  sellCrypto(amount, coinPrice.bitcoinPrice, "BTC");
   $("#amount-btc2").val("");
 });
 
@@ -162,7 +164,7 @@ $("#buyLTC").on("click", function() {
       .val()
       .trim()
   );
-  buyCrypto(amount, litecoinPrice, "LTC");
+  buyCrypto(amount, coinPrice.litecoinPrice, "LTC");
   $("#amount-ltc").val("");
 });
 
@@ -173,7 +175,7 @@ $("#sellLTC").on("click", function() {
       .val()
       .trim()
   );
-  sellCrypto(amount, litecoinPrice, "LTC");
+  sellCrypto(amount, coinPrice.litecoinPrice, "LTC");
   $("#amount-ltc2").val("");
 });
 
@@ -184,7 +186,7 @@ $("#buyEther").on("click", function() {
       .val()
       .trim()
   );
-  buyCrypto(amount, ethereumPrice, "ETH");
+  buyCrypto(amount, coinPrice.ethereumPrice, "ETH");
   $("#amount-eth").val("");
 });
 
@@ -195,7 +197,7 @@ $("#sellEther").on("click", function() {
       .val()
       .trim()
   );
-  sellCrypto(amount, ethereumPrice, "ETH");
+  sellCrypto(amount, coinPrice.ethereumPrice, "ETH");
   $("#amount-eth2").val("");
 });
 
@@ -206,7 +208,7 @@ $("#buyXRP").on("click", function() {
       .val()
       .trim()
   );
-  buyCrypto(amount, ripplePrice, "XRP");
+  buyCrypto(amount, coinPrice.ripplePrice, "XRP");
   $("#amount-xrp").val("");
 });
 
@@ -217,6 +219,6 @@ $("#sellXRP").on("click", function() {
       .val()
       .trim()
   );
-  sellCrypto(amount, ripplePrice, "XRP");
+  sellCrypto(amount, coinPrice.ripplePrice, "XRP");
   $("#amount-xrp2").val("");
 });
