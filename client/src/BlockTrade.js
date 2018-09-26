@@ -18,7 +18,7 @@ export default class BlockTrade extends React.Component {
       coinCurrency: {
         btcPrice: 0, 
         ethPrice: 0,
-        ltcPrice: 145,
+        ltcPrice: 0,
         xrpPrice: 0
         // make these into strings for displaying
       },
@@ -33,7 +33,7 @@ export default class BlockTrade extends React.Component {
         xrp: 0,
         xrp_val: 0,
         ltc: 0,
-        ltc_val: 0,
+        ltc_val: 0
       },
       tradeHistory: []
     }
@@ -75,9 +75,9 @@ export default class BlockTrade extends React.Component {
 
   // gets our users id
   getUserId(){
-    axios.get("api/user").then(function(data) {
-    console.log(data);
-    var userId = data.id;
+    axios.get("/api/user").then((user) => {
+    console.log(user);
+    var userId = user.data.id;
     console.log(userId);
     this.userPortfolio(userId);
   });
@@ -85,33 +85,58 @@ export default class BlockTrade extends React.Component {
 
   // function pulls portfolio data so we can render to the screen. If there is not portfolio data on user then we will call createPort to create one
   userPortfolio(userId){
-    axios.get("api/user/" + userId).then(function(data) {
-      console.log(data);
-      var userPort = data;
+    axios.get("api/user/" + userId).then((userPortfolio) => {
+      console.log(userPortfolio);
+      var userPort = userPortfolio.data;
       console.log(userPort);
+      console.log("userPort userPortfolio");
       if (!userPort) {
         this.createPort(userId);
       } else {
         console.log(userPort);
-        this.setState({userPortfolio: data})
-          //reAvaluate(userPort);
+        this.setState({userPortfolio: userPortfolio.data})
       } 
     });
   }
   
   // get request where backend will create a portfolio and send the new data
   createPort(userId){
-    axios.get(`api/newPort/${userId}`).then(function(data) {
+    console.log("Creating Portfolio -------------");
+    axios.get(`api/newPort/${userId}`).then((data) => {
       console.log(" createPort user portfolio data " + data);
-      //reAvaluate(userPort);
-      this.setState({userPortfolio: data})
+      console.log(data.data);
+      this.setState({userPortfolio: {
+        userId: data.data.UserId,
+        totalNet: parseFloat(data.data.totalNet.toFixed(2)),
+        usd: parseFloat(data.data.usd.toFixed(2)),
+        btc: parseFloat(data.data.btc.toFixed(2)),
+        btc_val: parseFloat(data.data.btc_val.toFixed(2)),
+        eth: parseFloat(data.data.eth.toFixed(2)),
+        eth_val: parseFloat(data.data.eth_val.toFixed(2)),
+        xrp: parseFloat(data.data.xrp.toFixed(2)),
+        xrp_val: parseFloat(data.data.xrp_val.toFixed(2)),
+        ltc: parseFloat(data.data.ltc.toFixed(2)),
+        ltc_val: parseFloat(data.data.ltc_val.toFixed(2))
+      }})
     });
   }
 
    // updates portfolio with new data based on recent buy. Function is called after buy/sell functionality
   updatePortfolio(userPort){
     userPort.totalNet = userPort.usd +  userPort.btc_val + userPort.eth_val +  userPort.xrp_val + userPort.ltc_val
-    this.setState({userPortfolio: userPort})
+    this.setState({userPortfolio: {
+      userId: userPort.UserId,
+      totalNet: parseFloat(userPort.totalNet.toFixed(2)),
+      usd: parseFloat(userPort.usd.toFixed(2)),
+      btc: parseFloat(userPort.btc.toFixed(2)),
+      btc_val: parseFloat(userPort.btc_val.toFixed(2)),
+      eth: parseFloat(userPort.eth.toFixed(2)),
+      eth_val: parseFloat(userPort.eth_val.toFixed(2)),
+      xrp: parseFloat(userPort.xrp.toFixed(2)),
+      xrp_val: parseFloat(userPort.xrp_val.toFixed(2)),
+      ltc: parseFloat(userPort.ltc.toFixed(2)),
+      ltc_val: parseFloat(userPort.ltc_val.toFixed(2))
+    }})
     console.log(this.state);
     //TODO: might have an id problem
     axios.put("/api/user/updatePortfolio", this.state.userPortfolio).then(function(data) {
@@ -124,7 +149,7 @@ export default class BlockTrade extends React.Component {
 
   // getting original tradeHistory data to populate
   getTradeHistory(){
-    axios.get("/api/tradeHistory").then(function(data) {
+    axios.get("/api/tradeHistory").then((data) => {
       this.setState({tradeHistory: [data]})
       console.log(this.state.tradeHistory);
     });

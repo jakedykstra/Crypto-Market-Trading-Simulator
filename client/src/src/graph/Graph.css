@@ -1,3 +1,20 @@
+.graphContainer {
+  display: inline-block;
+  background: #393e46;
+  width: 40%;
+  height: 100%;
+  margin: auto;
+  margin-top: 25px;
+  border: 5px;
+  border-style: solid;
+  border-color: #4ecca3;
+}
+
+.svg-container {
+  background: #393e46;  
+}
+
+
 .row {
   display: flex;
   justify-content: center;

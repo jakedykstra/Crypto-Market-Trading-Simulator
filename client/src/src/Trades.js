@@ -6,21 +6,18 @@ class Trades extends React.Component {
   constructor(props){
     super(props)
 
-    var userPortfolio = this.props.userPortfolio;
-    var tradeHistory = this.props.tradeHistory;
-
     this.state = {
-      btcBuy: 0,
-      btcSell: 0,
-      ethBuy: 0,
-      ethSell: 0,
-      ltcBuy: 0,
-      ltcSell: 0,
-      xrpBuy: 0,
-      xrpSell: 0,
+      btcBuy: '',
+      btcSell: '',
+      ethBuy: '',
+      ethSell: '',
+      ltcBuy: '',
+      ltcSell: '',
+      xrpBuy: '',
+      xrpSell: '',
       type: '',
       name: '',
-      value: 0,
+      value: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,7 +29,7 @@ class Trades extends React.Component {
     e.preventDefault()
     console.log(e)
     console.log(e.target.name)
-    var val = parseFloat(e.target.value)
+    var val = e.target.value
     console.log(e.target.className)
     this.setState({ 
       [(e.target.name + e.target.className)]: val,
@@ -57,18 +54,22 @@ class Trades extends React.Component {
     } else {
       this.cryptoSell(this.state.name, this.state.value)
     }
-    this.setState({[(this.state.name + this.state.type)]: 0})
+    this.setState({[(this.state.name + this.state.type)]: ''})
     console.log(this.state);
   }
 
   cryptoPurchase(cryptoType, amount){
+    amount = parseFloat(amount)
+
+    // check to make sure it is now a number
     if(typeof amount == 'number'){
       console.log("number!")
      }else{
       console.log("now a number")
      }
+
+     // set crypto val for checking then test
     var crypto = cryptoType + "Price"
-    console.log(crypto)
     console.log(this.props.userPortfolio);
     console.log(this.props.coinCurrency[crypto]);
     if(typeof this.props.coinCurrency[crypto] == 'number'){
@@ -84,7 +85,6 @@ class Trades extends React.Component {
       this.props.userPortfolio.usd -= amount;
       this.props.userPortfolio[cryptoType] += totalAmount;
       var cryptoTypeVal = cryptoType + "_val"
-      //TODO: need to fix eth
       this.props.userPortfolio[cryptoTypeVal] = this.props.userPortfolio[cryptoType] * this.props.coinCurrency[crypto];
       console.log(this.props.userPortfolio);
       this.props.updatePort(this.props.userPortfolio);
@@ -94,18 +94,18 @@ class Trades extends React.Component {
   }
 
   cryptoSell(cryptoType, amount){
+    amount = parseFloat(amount)
     var crypto = cryptoType + "Price"
     var totalAmount = amount * this.props.coinCurrency[crypto];
     if (amount > this.props.userPortfolio[cryptoType]) {
-      // alert("You dont have enough");
       console.log("You dont have enough!");
     } else {
       this.props.userPortfolio.usd += amount;
       this.props.userPortfolio[cryptoType] -= totalAmount;
       var cryptoTypeVal = cryptoType + "_val"
-      //TODO: need to fix eth
       this.props.userPortfolio.cryptoTypeVal = this.props.userPortfolio[cryptoType] * this.props.coinCurrency[crypto];
-      this.props.newTrade(this.props.coinCurrency[crypto], amount, totalAmount, "Buy", cryptoType)
+      this.props.updatePort(this.props.userPortfolio);
+      this.props.newTrade(this.props.coinCurrency[crypto], amount, totalAmount, "Sell", cryptoType)
     }
     
   }

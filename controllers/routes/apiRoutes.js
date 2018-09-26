@@ -1,4 +1,4 @@
-var db = require("../models");
+var db = require("../../models");
 
 module.exports = function(app) {
   // TODO:
@@ -9,22 +9,21 @@ module.exports = function(app) {
   // push to userTradeHistory
 
   app.get("/api/user", function(req, res) {
-    res.json(req.user);
+    res.send(req.user);
   });
 
   app.get("/api/newPort/:userId", function(req, res) {
     db.Portfolio.create({
       totalNet: 100000.0,
-      USD: 100000.0,
-      BTC: 0.0,
-      BTC_Val: 0.0,
-      ETH: 0.0,
-      ETHVal: 0.0,
-      XRP: 0.0,
-      XRP_Val: 0.0,
-      LTC: 0.0,
-      LTC_Val: 0.0,
-
+      usd: 100000.0,
+      btc: 0.0,
+      btc_val: 0.0,
+      eth: 0.0,
+      eth_val: 0.0,
+      xrp: 0.0,
+      xrp_val: 0.0,
+      ltc: 0.0,
+      ltc_val: 0.0,
       UserId: req.params.userId
     }).then(function(dbPortfolio) {
       console.log("portfolio-----" + dbPortfolio);

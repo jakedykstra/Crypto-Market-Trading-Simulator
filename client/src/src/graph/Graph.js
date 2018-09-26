@@ -41,7 +41,7 @@ class Graph extends Component {
           let count = 0;
           let addDate;
           for (var i of cryptoData.Data){
-            console.log(i);
+            // console.log(i);
             addDate = new Date(i.time * 1000);
             sortedData.push({
               d: moment(addDate).format('MMM DD'),
@@ -51,7 +51,7 @@ class Graph extends Component {
             });
             count++;
           }
-          console.log("sortedData is here ========" + sortedData);
+          // console.log("sortedData is here ========" + sortedData);
           this.setState({
             data: sortedData,
             fetchingData: false
@@ -66,7 +66,7 @@ class Graph extends Component {
   render() {
     return (
 
-      <div className='container'>
+      <div className='container graphContainer'>
         <div className='row'>
           <h1>90 Day Bitcoin Price Chart</h1>
         </div>

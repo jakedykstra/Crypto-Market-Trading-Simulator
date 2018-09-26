@@ -6,42 +6,46 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.FLOAT,
         default: 10000.0
       },
-      USD: {
+      usd: {
         type: DataTypes.FLOAT,
         default: 10000.0
       },
-      BTC: {
+      btc: {
         type: DataTypes.FLOAT,
         default: 0.0
       },
-      BTC_Val: {
+      btc_val: {
         type: DataTypes.FLOAT,
         default: 0.0
       },
-      ETH: {
+      eth: {
         type: DataTypes.FLOAT,
         default: 0.0
       },
-      ETHVal: {
+      eth_val: {
         type: DataTypes.FLOAT,
         default: 0.0
       },
-      XRP: {
+      xrp: {
         type: DataTypes.FLOAT,
         default: 0.0
       },
-      XRP_Val: {
+      xrp_val: {
         type: DataTypes.FLOAT,
         default: 0.0
       },
-      LTC: {
+      ltc: {
         type: DataTypes.FLOAT,
         default: 0.0
       },
-      LTC_Val: {
+      ltc_val: {
         type: DataTypes.FLOAT,
         default: 0.0
       }
+      // UserId: {
+      //   type: DataTypes.BIGINT,
+      //   allowNull: false
+      // }
     },
     {
       timestamps: false

@@ -9,13 +9,15 @@ var passport = require("passport");
 var session = require("express-session");
 require("dotenv").config();
 var db = require("./models");
+var cors = require("cors");
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
+app.use(cors());
 
 // For Passport
 // creates session secret
@@ -40,7 +42,6 @@ app.set("view engine", "handlebars");
 // Routes
 require("./controllers/routes/auth.js")(app, passport);
 require("./controllers/routes/apiRoutes")(app);
-require("./controllers/routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
 

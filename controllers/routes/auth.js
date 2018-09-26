@@ -1,31 +1,25 @@
-var authController = require("../controllers/authcontroller.js");
-
 module.exports = function(app, passport) {
-  app.get("/login", authController.login);
+  app.get("/api/dashboard", isLoggedIn, function(req, res) {
+    res.send(req.user);
+  });
 
-  app.get("/signup", authController.signup);
-
-  app.get("/logout", authController.logout);
-
-  app.get("/dashboard", isLoggedIn, authController.dashboard);
+  app.get("/api/", isLoggedIn, function(req, res) {
+    res.send(req.user);
+  });
 
   app.post(
-    "/signup",
-    // checker for submit button - signup vs signin
-    // if signup
+    "/api/signup",
     passport.authenticate("local-signup", {
-      successRedirect: "/dashboard",
-      failureRedirect: "/login"
+      successRedirect: "/api/dashboard",
+      failureRedirect: "/api/failed"
     })
   );
 
   app.post(
-    "/login",
-    // checker for submit button - signup vs signin
-    // if signin
+    "/api/login",
     passport.authenticate("local-signin", {
-      successRedirect: "/dashboard",
-      failureRedirect: "/login"
+      successRedirect: "/api/dashboard",
+      failureRedirect: "/api/failed"
     })
   );
 
@@ -34,7 +28,8 @@ module.exports = function(app, passport) {
     if (req.isAuthenticated()) {
       return next();
     }
-
     res.redirect("/login");
+    res.send({ login: failed });
+    console.log("not authenticated");
   }
 };
