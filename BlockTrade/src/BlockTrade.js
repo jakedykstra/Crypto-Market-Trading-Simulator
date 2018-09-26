@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './BlockTrade.css';
 import UserData from './src/UserData';
 import Graph from './src/graph/Graph'
-// import TradeHistoryTable from './src/TradeHistoryTable';
+import TradeHistoryTable from './src/TradeHistoryTable';
 import Trades from './src/Trades';
 import axios from 'axios';
 
@@ -38,24 +38,39 @@ export default class BlockTrade extends React.Component {
       tradeHistory: []
     }
     this.updatePortfolio = this.updatePortfolio.bind(this);
+    // this.getCryptoPrice = this.getCryptoPrice.bind(this);
+    this.getUserId = this.getUserId.bind(this);
+    this.userPortfolio = this.userPortfolio.bind(this);
+    this.createPort = this.createPort.bind(this); 
+    this.getTradeHistory = this.getTradeHistory.bind(this); 
   }
 
   //this.usd +  this.btc_val + this.eth_val +  this.xrp_val + this.ltc_val,
 
   //Pulls from API and saves prices. Calls reAvaluate function to start off
   getCryptoPrice() {
+    var bitcoinPrice 
+    var ethereumPrice 
+    var ripplePrice
+    var litecoinPrice 
     axios.get(
-      "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD").then(function(data) {
+      "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD").then((data) => {
+        console.log(data);
+        console.log(data.data);
+        console.log(data.data.RAW);
         this.setState({coinCurrency: {
-          btcPrice: parseFloat(data.RAW.BTC.USD.PRICE),
-          ethPrice: parseFloat(data.RAW.ETH.USD.PRICE),
-          ltcPrice: parseFloat(data.RAW.LTC.USD.PRICE),
-          xrpPrice: parseFloat(data.RAW.XRP.USD.PRICE)
+          btcPrice: data.data.RAW.BTC.USD.PRICE,
+          ethPrice: data.data.RAW.ETH.USD.PRICE,
+          ltcPrice: data.data.RAW.LTC.USD.PRICE,
+          xrpPrice: data.data.RAW.XRP.USD.PRICE
         }
       })
         // TODO: make component for rendering return this.tradeRate(this.state.coinCurrency.btcPrice, this.state.coinCurrency.ethPrice, this.state.coinCurrency.ltcPrice, this.state.coinCurrency.xrpPrice);
       }
-    );
+    )
+    .catch((error)=>{
+      console.log(error);
+   });
   }
 
   // gets our users id
@@ -127,7 +142,7 @@ export default class BlockTrade extends React.Component {
       usdAmount,
       tradeType
     };
-    updateTradeHistory(){
+    function updateTradeHistory(newTrade) {
       axios.post("/api/tradeHistory", newTrade).then(function(data) {
         console.log(data);
       })
@@ -135,18 +150,19 @@ export default class BlockTrade extends React.Component {
         console.log(error);
       });
     }
-    this.getTradeHistory();
+    updateTradeHistory()
+    this.getTradeHistory;
 }
 
-  componentDidMount () {
 
+  componentDidMount () {
+    this.getCryptoPrice();
+    this.getUserId();
+    this.getTradeHistory();
   }
 
 
   render() {
-    {this.getCryptoPrice()}
-    {this.getUserId()}
-    {this.getTradeHistory()}
 
     return(
         <div>
@@ -159,7 +175,7 @@ export default class BlockTrade extends React.Component {
         userPortfolio={this.state.userPortfolio} 
         updatePort={this.updatePortfolio} 
         tradeHistory={this.state.tradeHistory}
-        newTrade={this.newTrade]}
+        newTrade={this.newTrade}
       />
       <TradeHistoryTable 
         tradeHistory={this.state.tradeHistory} 

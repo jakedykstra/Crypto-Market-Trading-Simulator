@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './styles.css';
 
 // displays the user's investments in ea crypto
 class Trades extends React.Component {
@@ -24,18 +25,9 @@ class Trades extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.onChange = this.onChange.bind(this);
  
   }
 
-
-  // trade(trade, cryptoType, amount){
-  //   if(trade="Buy"){
-  //     this.cryptoPurchase(cryptoType, amount)
-  //   } else {
-  //     this.cryptoSell(cryptoType, amount)
-  //   }
-  // }
   handleChange(e) {
     e.preventDefault()
     console.log(e)
@@ -99,7 +91,6 @@ class Trades extends React.Component {
       this.props.newTrade(this.props.coinCurrency[crypto], amount, totalAmount, "Buy", cryptoType)
     }
     
-    // {tradeHistory(crypto, amount, totalAmount, "Buy", cryptoType)}
   }
 
   cryptoSell(cryptoType, amount){
@@ -117,7 +108,6 @@ class Trades extends React.Component {
       this.props.newTrade(this.props.coinCurrency[crypto], amount, totalAmount, "Buy", cryptoType)
     }
     
-    // {tradeHistory(crypto, amount, totalAmount, "Sell", cryptoType)}
   }
 
   render() {
