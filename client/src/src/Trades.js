@@ -49,7 +49,7 @@ class Trades extends React.Component {
     console.log(this.state.name);
     console.log(this.state.value);
     console.log('A name was submitted: ');
-    if (this.state.type === "Buy"){
+    if (this.state.type == "Buy"){
       this.cryptoPurchase(this.state.name, this.state.value)
     } else {
       this.cryptoSell(this.state.name, this.state.value)
@@ -67,28 +67,32 @@ class Trades extends React.Component {
      }else{
       console.log("now a number")
      }
-
      // set crypto val for checking then test
     var crypto = cryptoType + "Price"
     console.log(this.props.userPortfolio);
     console.log(this.props.coinCurrency[crypto]);
-    if(typeof this.props.coinCurrency[crypto] == 'number'){
-      console.log("number!")
-     }else{
-      console.log("now a number")
-     }
-    var totalAmount = amount / this.props.coinCurrency[crypto];
+    // creating a coin amount to work off of. Takes the usd amount were spending and divides it by the cryptocoins current rate to get the amount of coins now in the portfolio
+    var amountOfCoins = amount / this.props.coinCurrency[crypto];
+    // checking to make sure you have enough in your portfolio for the purchase
     if (amount > this.props.userPortfolio.usd) {
-      // alert("You dont have enough");
-      console.log("You dont have enough!");
+      console.log("You dont have enough usd to buy!");
     } else {
+      // if theres enough get the code running!
+      // take the amount inserted from the usd in portfolio
       this.props.userPortfolio.usd -= amount;
-      this.props.userPortfolio[cryptoType] += totalAmount;
+      // take the crypto amount from portfolio and add the amountOfCoins just purchased
+      this.props.userPortfolio[cryptoType] += amountOfCoins;
+      // now we are getting the usd equivalence
+      // the value is equal to the amount of coins we have multiplied by the current rate of the coin
       var cryptoTypeVal = cryptoType + "_val"
       this.props.userPortfolio[cryptoTypeVal] = this.props.userPortfolio[cryptoType] * this.props.coinCurrency[crypto];
       console.log(this.props.userPortfolio);
+      // updating the coin api
+      this.props.updateApi();
+      // updating the userportfolio
       this.props.updatePort(this.props.userPortfolio);
-      this.props.newTrade(this.props.coinCurrency[crypto], amount, totalAmount, "Buy", cryptoType)
+      // updating the tradeHistory
+      this.props.newTrade(this.props.coinCurrency[crypto], amount, amountOfCoins, "Buy", cryptoType)
     }
     
   }
@@ -96,16 +100,23 @@ class Trades extends React.Component {
   cryptoSell(cryptoType, amount){
     amount = parseFloat(amount)
     var crypto = cryptoType + "Price"
-    var totalAmount = amount * this.props.coinCurrency[crypto];
-    if (amount > this.props.userPortfolio[cryptoType]) {
-      console.log("You dont have enough!");
+    // setting amount of coins to amount selling multiplied by current crypto worth
+    var coinWorth = amount * this.props.coinCurrency[crypto];
+    // checking that amount of coin you're trying to sell is equal or less than amount of coins in user portfolio
+    if (amount >= this.props.userPortfolio[cryptoType]) {
+      console.log("You dont have enough coin to sell!");
     } else {
-      this.props.userPortfolio.usd += amount;
-      this.props.userPortfolio[cryptoType] -= totalAmount;
+      // if you have enough coin
+      // add usd for selling crypto to usd
+      this.props.userPortfolio.usd += coinWorth;
+      this.props.userPortfolio[cryptoType] -= amount;
       var cryptoTypeVal = cryptoType + "_val"
-      this.props.userPortfolio.cryptoTypeVal = this.props.userPortfolio[cryptoType] * this.props.coinCurrency[crypto];
+      // value of crypto coin you own becomes the coin you now own multiplied by the current cryptorate
+      this.props.userPortfolio[cryptoTypeVal] = this.props.userPortfolio[cryptoType] * this.props.coinCurrency[crypto];
+      // update api, userPort, and tradeHistory
+      this.props.updateApi();
       this.props.updatePort(this.props.userPortfolio);
-      this.props.newTrade(this.props.coinCurrency[crypto], amount, totalAmount, "Sell", cryptoType)
+      this.props.newTrade(this.props.coinCurrency[crypto], amount, coinWorth, "Sell", cryptoType)
     }
     
   }

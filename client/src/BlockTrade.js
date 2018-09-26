@@ -201,6 +201,7 @@ export default class BlockTrade extends React.Component {
         updatePort={this.updatePortfolio} 
         tradeHistory={this.state.tradeHistory}
         newTrade={this.newTrade}
+        updateApi={this.getCryptoPrice}
       />
       <TradeHistoryTable 
         tradeHistory={this.state.tradeHistory} 
