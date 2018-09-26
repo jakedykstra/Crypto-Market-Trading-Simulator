@@ -15,7 +15,7 @@ class BuyAndSellTextInput extends Component{
             sellAmount: ''
         };
 
-        this.handleInputChange = 
+    this.handleInputChange = 
     this.handleInputChange.bind(this);
 
     }

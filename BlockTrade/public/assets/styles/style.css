@@ -1,0 +1,479 @@
+body, html {
+    height: 100%;
+    margin: 0px;
+    font-family: Roboto Condensed,sans-serif;
+    background-color: #232931;
+    position: relative;
+    
+}
+
+#splashDiv {
+    overflow: hidden;
+    width: 100%;
+    height: 370px;
+}
+
+#splashWrap {
+    background-image: url(../images/background.jpeg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    position: relative;
+    height: calc(100% + (4 * 6px));
+    width: calc(100% + (4 * 6px));
+    bottom: 6px;
+    right: 6px;
+}
+
+#title {
+    color: #eeeeee;
+    margin: 0px auto;
+    max-width: 1280px;
+    font-weight: 900;
+}
+
+#headWrap {
+    background: #232931;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    justify-content: flex-start;
+    z-index: 2; 
+    width: 100%;
+}
+
+#headWrap > div {
+    max-width: 1280px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#text-body {
+    background-color: #232931;
+    width:100%;
+    height:400px;
+}
+
+#getStarted {
+    cursor: pointer;
+    font-family: Roboto Condensed,sans-serif;
+    font-size: 25px;
+    background: #232931;
+    text-align: center;
+    color: #eeeeee;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 41.5%;
+    z-index: 999;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#description {
+    max-width: 1280px;
+    height: 300px;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+    margin: auto;
+    padding: 30px;
+    margin-top: 30px;
+    color: white;
+    font-size: 20px;
+    background-color: #393e46;
+}
+
+#main {
+    position: relative;
+    border-top: 5px #4ecca3 solid; 
+    border-bottom: 5px #4ecca3 solid; 
+}
+
+img {
+    height: 75px;
+    max-width: 75px;
+    float: left;
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    margin-bottom: 5px;
+   
+}
+
+.index-header {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+}
+
+#accountContainer {
+    display: inline-block;
+    background: #393e46;
+    width: 25%;
+    height: 100%;
+    margin: auto;
+    margin-top: 25px;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+}
+
+#graphContainer {
+    display: inline-block;
+    background: #393e46;
+    width: 40%;
+    height: 100%;
+    margin: auto;
+    margin-top: 25px;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+}
+
+#svg-container {
+    background: #393e46;  
+}
+
+#tradeContainer {
+    display: inline-block;
+    background: #393e46;
+    width: 25%;
+    height: 100%;
+    margin: auto;
+    margin-top: 25px;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+}
+
+#tradeHistory {
+    background: #393e46;
+    margin-top: 0px;
+    width: calc(100% - 83px);
+    height: 230px;
+    margin: 80px 37px; 
+    margin-bottom: 0px;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+#tradeHistory h1 {
+    margin: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #eeeeee;
+}
+
+#profileContainers {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    color: white;
+}
+
+.titleTab {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+}
+
+.titleTab h1 {
+    font-size: 24x;
+    margin: 0px 0px 0px 10px;
+}
+
+#coin {
+    width: 100%;
+    height: 110px;
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    display: flex;
+    align-content: center;
+    align-items: center; 
+    padding: 0;
+}
+
+#coin img {
+    margin-left: 20px;
+    padding: 0;
+}
+
+.bitImage {
+    height: 50px;
+    width: 50px;
+}
+
+.price {
+    color: #70a800;
+}
+
+.priceImage {
+    display: flex;
+    align-items: center;
+    width: 45%;
+    float: left;
+}
+
+.inputFields {
+    width: 55%;
+    float: right;
+}
+
+input {
+    margin: 7px;
+    margin-left: 15px;
+    background-color: #393e46;
+    border-color: #4ecca3;
+    color: white;
+    text-align: center;
+}
+
+::placeholder {
+    color:white;
+    opacity: .60;
+    text-align: center;
+}
+
+.buyButton {
+    color: white;
+    background:rgb(18, 204, 18);
+    font-family: Roboto Condensed,sans-serif;
+    border-color: #4ecca3;
+    cursor: pointer;
+}
+
+.sellButton {
+    color: white;
+    background: red;
+    font-family: Roboto Condensed,sans-serif;
+    border-color: #4ecca3;
+    cursor: pointer;
+}
+
+.balances {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    font-size: 70%;
+}
+
+#cash {
+    color: rgb(18, 204, 18);
+    margin-left: 15px;
+    
+}
+
+#net {
+    color: #f1c506;
+    margin-left: 15px;
+    
+}
+
+#amount {
+    float: right;
+    margin-right: 120px;
+}
+
+#coinInvestment {
+    width: 100%;
+    height: 73.8px;
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    display: flex;
+    align-content: center;
+    align-items: center; 
+    padding: 0;
+    
+}
+
+#investmentContainer {
+    display: block;
+}
+
+#coinInvestment img {
+    margin-left: 20px;
+}
+
+.ripple {
+    margin-left: 50px;
+    align-self: center;
+    color: #009dd6;
+}
+
+.bitcoin {
+    margin-left: 50px;
+    align-self: center;
+    color: #f1c506;
+}
+
+.litecoin {
+    margin-left: 50px;
+    align-self: center;
+    color: #bebebe;
+}
+
+.ethereum {
+    margin-left: 50px;
+    align-self: center;
+    color: #0b0b0d;
+}
+
+#graphButtonContainer {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    height: 38px;
+}
+
+.graphButton {
+    width: 180px;
+    margin: auto;
+    font-family: Roboto Condensed,sans-serif;
+    font-weight: bold;
+    color: white;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+}
+
+#graphBTC {
+    background-color: #f1c506;
+}
+
+#graphLTC {
+    background-color: #bebebe;
+}
+
+#graphETH {
+    background-color: #0b0b0d;
+}
+
+#graphXRP {
+    background-color: #009dd6;
+}
+
+svg {
+    width: 690px;
+}
+
+.svg-container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 20px;
+    height: 500px;
+}
+
+.history-table {
+    width: 100%;
+}
+
+.history-table th {
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    width: 280px;
+    margin: auto;
+    font-weight: bold;
+}
+
+#loginRegister {
+    height: 340px;
+    width: 500px;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+    margin: auto;
+    color: white;
+    font-size: 20px;
+    background-color: #393e46;
+    margin-top: 80px;
+    
+}
+
+#loginRegister h1 {
+    text-align: center;
+    border-bottom: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #4ecca3;
+    padding: 15px;
+    margin-top: 7.5px;
+    margin-bottom: 15px;
+    
+}
+
+.bothLogin {
+    margin-left: 110px;
+}
+
+#username {
+    margin-top: 30px;
+}
+
+.loginButton {
+    cursor: pointer;
+    font-family: Roboto Condensed,sans-serif;
+    font-size: 18px;
+    background: #393e46;
+    text-align: center;
+    color: #eeeeee;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+    width: 150px;
+    height: 75px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#indexRegister {
+    float: left;
+    margin-left: 85px;
+}
+
+#indexLogin {
+    float: right;
+    margin-right: 85px;
+}
+
+#registerDiv {
+    display: block;
+    width: 100%;
+    height: 55px;
+}
+
+#password {
+    margin-bottom: 30px;
+}
+
+#emailInput {
+    margin-left: 34px;
+}
+
+td {
+    background-color: white;
+    color: black;
+    position: relative;
+}
+
+.history-table {
+    overflow: hidden;
+    position: relative;
+}
+
