@@ -38,9 +38,9 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes
-require("./routes/auth.js")(app, passport);
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./controllers/routes/auth.js")(app, passport);
+require("./controllers/routes/apiRoutes")(app);
+require("./controllers/routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
 

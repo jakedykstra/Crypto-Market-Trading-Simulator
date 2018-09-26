@@ -24,6 +24,7 @@ module.exports = function(app) {
       XRP_Val: 0.0,
       LTC: 0.0,
       LTC_Val: 0.0,
+
       UserId: req.params.userId
     }).then(function(dbPortfolio) {
       console.log("portfolio-----" + dbPortfolio);

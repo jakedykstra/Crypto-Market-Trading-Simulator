@@ -24,5 +24,10 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE
   });
+<<<<<<< HEAD:models/tradeHistory.js
   return tradeHistory;
 };
+=======
+  return TradeHistory;
+};
+>>>>>>> react_apiCalls:models/siteHistory.js
