@@ -83,7 +83,6 @@ class Graph extends Component {
             data: sortedData,
             fetchingData: false
           })
-          this.updateBox()
         })
         .catch((e) => {
           console.log(e);
@@ -102,7 +101,6 @@ class Graph extends Component {
   render() {
     this.getData();
     return (
-
       <div className='container graphContainer'>
         <div className='row'>
           <h1>90 Day {this.state.currentCoin} Price Chart</h1>
