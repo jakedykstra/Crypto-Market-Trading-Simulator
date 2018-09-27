@@ -2,8 +2,7 @@ require("dotenv").config();
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
-var exphbs = require("express-handlebars");
-var path = require("path");
+// var path = require("path");
 // modules needed for passport user auth
 var passport = require("passport");
 var session = require("express-session");
@@ -17,7 +16,6 @@ var PORT = process.env.PORT || 5000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(express.static("public"));
 app.use(cors());
 
 // For Passport
@@ -30,15 +28,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 //load passport strategies
 require("./config/passport")(passport, db.User, db, db.Portfolio);
-
-// Handlebars
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
 
 // Routes
 require("./controllers/routes/auth.js")(app, passport);
