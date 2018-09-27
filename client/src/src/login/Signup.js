@@ -69,12 +69,13 @@ export default class Signup extends Component {
                 <h1>
                   Register
                 </h1>
-                <form id="signup" name="signup" method="post">
-                  <label htmlFor="email" name="uname">Email Address</label>
+                <form id="loginform" name="signup" method="post">
+                  <label className='label' htmlFor="email" name="uname">Email Address</label>
                   <input className="text" name="email" type="email" onChange={this.handleChange} value={this.state.email} />
-                  <label htmlFor="password">Password</label>
+                  <br></br>
+                  <label className="label" htmlFor="password">Password</label>
                   <input name="password" type="password" onChange={this.handleChange} />
-                    <button className="btn" type="submit" onClick={(e) => this.handleSubmit(e)} defaultValue="Sign In"><DelayLink to="/dashboard">Submit</DelayLink></button>
+                    <button className="btn-style" type="submit" onClick={(e) => this.handleSubmit(e)} defaultValue="Sign In"><DelayLink className='linkstyle' to="/dashboard">Submit</DelayLink></button>
                 </form>
               </div>
             </div>

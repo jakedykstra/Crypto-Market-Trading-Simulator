@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './styles.css';
+
 
 
 export default class Landing extends Component {
@@ -8,8 +8,7 @@ export default class Landing extends Component {
   render(){
     return (
       <div>
-        <div id="headWrap">
-          <h3>Welcome! Sign up or sign in!</h3>;
+      <div id="headWrap">
           <div>
             <img src="assets/images/btlogo3.png" />
             <h1 id="title">Block Trade</h1>
@@ -19,11 +18,11 @@ export default class Landing extends Component {
           <div id="splashDiv">
             <div id="splashWrap" />
           </div>
-          <h4>Get Started!</h4>
-          <button id="signIn">
+          {/* <h4>Get Started!</h4> */}
+          <button className="login">
             <Link to="/login">Login</Link>
           </button>
-          <button id="signUp">
+          <button className="signup">
             <Link to="/signup">Signup</Link>
         </button>
         </div>
@@ -43,7 +42,7 @@ export default class Landing extends Component {
             </p>
           </div>
         </div>
-      </div>
+        </div>
     );
   }
 };

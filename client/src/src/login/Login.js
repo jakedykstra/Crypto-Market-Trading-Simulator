@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-import '../styles.css';
+import DelayLink from '../helper/Delay';
 
 export default class Login extends Component {
   constructor(props){
@@ -16,7 +16,7 @@ export default class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
- signup(){
+ signin(){
     console.log(this.state);
     axios.post("/api/login", {
       email: this.state.email,
@@ -29,7 +29,6 @@ export default class Login extends Component {
 
   getUser(){
     axios.get("/api/dashboard").then(function(user){
-      var userId;
       console.log(user);
       console.log(user.data.id);
     })
@@ -44,7 +43,7 @@ export default class Login extends Component {
 
   handleSubmit(e){
     console.log(this.state)
-    this.signup(this.state)
+    this.signin(this.state)
     this.setState({
       email: '',
       password: ''
@@ -67,12 +66,13 @@ export default class Login extends Component {
                 <h1>
                   Login
                 </h1>
-                <form id="signup" name="signup" method="post">
-                  <label htmlFor="email" name="uname">Email Address</label>
+                <form id="loginform" name="signin" method="post">
+                  <label className="label" htmlFor="email" name="uname">Email Address:</label>
                   <input className="text" name="email" type="email" onChange={this.handleChange} value={this.state.email} />
-                  <label htmlFor="password">Password</label>
-                  <input name="password" type="password" onChange={this.handleChange} />
-                    <button className="btn" type="submit" onClick={(e) => this.handleSubmit(e)} defaultValue="Sign In"><Link to="/dashboard">Submit</Link></button>
+                  <br></br>
+                  <label className="label" htmlFor="password">Password:</label>
+                  <input className="text" name="password" type="password" onChange={this.handleChange} />
+                    <button className="btn-style" type="submit" onClick={(e) => this.handleSubmit(e)} defaultValue="Sign In"><DelayLink className="linkstyle" to="/dashboard">Submit</DelayLink></button>
                 </form>
               </div>
             </div>

@@ -9,37 +9,54 @@ class InfoBox extends Component {
       currentPrice: null,
       monthChangeD: null,
       monthChangeP: null,
-      updatedAt: null
+      updatedAt: null,
+      lastCoin: ''
     }
   }
-  componentDidMount(){
-    this.getData = () => {
+
+  getData(){
+    if(this.props.coin == this.state.lastCoin){
+      return
+    } else {
+      this.setState({lastCoin: this.props.coin})
       const {data} = this.props;
-      const url = 'https://api.coindesk.com/v1/bpi/currentprice.json';
+      const url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD';
 
       fetch(url).then(r => r.json())
-        .then((bitcoinData) => {
-          const price = bitcoinData.bpi.USD.rate_float;
+        .then((coinData) => {
+          console.log(coinData);         
+          const price = coinData.RAW[this.props.coin].USD.PRICE;
           const change = price - data[60].y;
           const changeP = (price - data[60].y) / data[0].y * 100;
+          console.log("PRICEEEEEE");
+          console.log(price);
 
           this.setState({
-            currentPrice: bitcoinData.bpi.USD.rate_float,
+            currentPrice: coinData.RAW[this.props.coin].USD.PRICE,
             monthChangeD: change.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
             monthChangeP: changeP.toFixed(2) + '%',
-            updatedAt: bitcoinData.time.updated
+            updatedAt: Date.now()
           })
         })
         .catch((e) => {
           console.log(e);
         });
     }
+  }
+  
+  componentDidMount(){
     this.getData();
     this.refresh = setInterval(() => this.getData(), 90000);
   }
+
+  componentDidUpdate(){
+    this.getData();
+  }
+
   componentWillUnmount(){
     clearInterval(this.refresh);
   }
+
   render(){
     return (
       <div id="data-container">

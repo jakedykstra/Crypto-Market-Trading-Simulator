@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import './styles.css';
 
-const TableRow = ({ row }) => {
-  return (
-    <tr>
-      <td>{row.id}</td>
-      <td>{row.cryptoType}</td>
-      <td>${row.coinPrice}</td>
-      <td>{row.coinAmount}</td>
-      <td>${row.usdAmount}</td>
-      <td>{row.tradeType}</td>
-    </tr>
-  );
-};
+export default class TableRow extends React.Component {
+  constructor(props){
+    super(props)
+  }
 
-export default TableRow;
+    render(){
+      return (
+        <tr>
+          <td>{this.props.tradeRow.id}</td>
+          <td>{this.props.tradeRow.cryptoType}</td>
+          <td>${this.props.tradeRow.coinPrice}</td>
+          <td>{this.props.tradeRow.coinAmount}</td>
+          <td>${this.props.tradeRow.usdAmount}</td>
+          <td>{this.props.tradeRow.tradeType}</td>
+        </tr>
+      );
+  };
+}
+

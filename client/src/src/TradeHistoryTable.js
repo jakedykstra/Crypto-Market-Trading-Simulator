@@ -8,19 +8,24 @@ export default class TradeHistoryTable extends React.Component {
   }
 
   rowItems(){
-    this.props.tradeHistory.map(row => {
-    return (
-      <TableRow
-        key={row.id}
-        row={row}
-      />
-    );
-  });
-}
+    // console.log(this.props.tradeHistory);
+    // console.log('-----------------------------');
+    var tradeHistoryArr = this.props.tradeHistory.reverse();
+    // console.log(tradeHistoryArr);
+    return tradeHistoryArr.map(tradeRow => {
+      return (
+        <TableRow
+          tradeHistory={this.props.tradeHistory}
+          key={tradeRow.id}
+          tradeRow={tradeRow}
+        />
+      );
+    })
+  }   
 
   render() {
     return(
-    <div id="tradeHistory">
+    <div>
         <div className="titleTab">
           <h1>Trade History</h1>
         </div>
@@ -36,7 +41,7 @@ export default class TradeHistoryTable extends React.Component {
             </tr>
           </thead>
           <tbody className="body">
-          {this.rowItems}
+          {this.rowItems()}
           </tbody>
         </table>
       </div>

@@ -61,6 +61,10 @@ module.exports = function(app) {
   });
   // collects data passed in and saves to database's tradehistory table
   app.post("/api/tradeHistory", function(req, res) {
+    console.log("new trade data");
+    console.log("----------------------");
+    console.log("----------------------");
+    console.log(req.body);
     db.tradeHistory.create(req.body).then(function(historyData) {
       console.log("history data for us to pick apart" + historyData);
       return historyData;

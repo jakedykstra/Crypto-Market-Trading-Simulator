@@ -13,7 +13,8 @@ class Graph extends Component {
       data: null,
       hoverLoc: null,
       activePoint: null,
-      coin: 'BTC'
+      coin: 'BTC',
+      currentCoin: 'Bitcoin'
     }
   }
   handleChartHover(hoverLoc, activePoint){
@@ -28,11 +29,36 @@ class Graph extends Component {
     this.setState({
       coin: coin
     })
+    this.handleClick()
   }
 
-  componentDidMount(){
-    const getData = () => {
-      const url = 'https://min-api.cryptocompare.com/data/histoday?fsym=' + this.state.coin + '&tsym=USD&limit=90';
+  handleClick(){
+    this.getData();
+    this.currentCoin();
+  }
+
+  currentCoin(){
+    switch (this.state.coin) {
+      case 'BTC':
+        this.setState({currentCoin : 'Bitcoin'})
+        break;
+      case 'ETH':
+        this.setState({currentCoin : 'Ethereum'})
+        break;
+      case 'XRP':
+        this.setState({currentCoin : 'Ripple'})
+        break;
+      case 'LTC':
+        this.setState({currentCoin : 'LiteCoin'})
+        break;
+    
+      default:
+        break;
+    }
+  }
+
+  getData(){
+    const url = 'https://min-api.cryptocompare.com/data/histoday?fsym=' + this.state.coin + '&tsym=USD&limit=90';
 
       fetch(url).then( data => data.json())
         .then((cryptoData) => {
@@ -51,7 +77,8 @@ class Graph extends Component {
             });
             count++;
           }
-          // console.log("sortedData is here ========" + sortedData);
+          console.log("sortedData is here ========");
+          console.log(sortedData);
           this.setState({
             data: sortedData,
             fetchingData: false
@@ -61,18 +88,21 @@ class Graph extends Component {
           console.log(e);
         });
     }
-    getData();
+
+  componentDidMount(){      
+    this.getData();
   }
+
   render() {
     return (
 
       <div className='container graphContainer'>
         <div className='row'>
-          <h1>90 Day Bitcoin Price Chart</h1>
+          <h1>90 Day {this.state.currentCoin} Price Chart</h1>
         </div>
         <div className='row'>
           { !this.state.fetchingData ?
-          <InfoBox data={this.state.data} />
+          <InfoBox data={this.state.data} coin={this.state.coin}/>
           : null }
         </div>
         <div className='row'>
@@ -86,12 +116,14 @@ class Graph extends Component {
               <LineChart data={this.state.data} onChartHover={ (a,b) => this.handleChartHover(a,b) }/>
               : null }
           </div>
+        </div>
+        <div className='row'>
           <div className ='coins row'>
-              <button onClick={this.coinChange.bind(this, 'BTC')}>Bitcoin</button>
-              <button onClick={() => this.coinChange('ETH')}>Ethereum</button>
-              <button onClick={this.coinChange.bind(this, 'XRP')}>Ripple</button>
-              <button onClick={this.coinChange.bind(this, 'LTC')}>Litecoin {this.state.coin}</button>
-          </div>
+                <button onClick={this.coinChange.bind(this, 'BTC')}>Bitcoin</button>
+                <button onClick={() => this.coinChange('ETH')}>Ethereum</button>
+                <button onClick={this.coinChange.bind(this, 'XRP')}>Ripple</button>
+                <button onClick={this.coinChange.bind(this, 'LTC')}>LiteCoin</button>
+            </div>
         </div>
       </div>
 

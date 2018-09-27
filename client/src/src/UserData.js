@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './styles.css';
 
 export default class UserData extends React.Component {
   constructor(props) {
@@ -9,7 +8,6 @@ export default class UserData extends React.Component {
   render() {
 
     return( 
-      <div id="profileContainers">
         <div id="accountContainer">
           <div className="titleTab">
             <h1>Account</h1>
@@ -34,7 +32,7 @@ export default class UserData extends React.Component {
             </div>
             <div className="ethereumInvestment" id="coinInvestment">
               <img className="bitImage" src="assets/images/ethereum.png" />
-              <h1 className="ethereum">{this.props.userPortfolio.eth} ETH / ${this.props.userPortfolio.etc_val}</h1>
+              <h1 className="ethereum">{this.props.userPortfolio.eth} ETH / ${this.props.userPortfolio.eth_val}</h1>
             </div>
             <div className="rippleInvestment" id="coinInvestment">
               <img className="bitImage" src="assets/images/ripple.png" />
@@ -42,7 +40,6 @@ export default class UserData extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     )
   };
 }

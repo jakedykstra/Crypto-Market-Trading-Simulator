@@ -45,8 +45,6 @@ export default class BlockTrade extends React.Component {
     this.getTradeHistory = this.getTradeHistory.bind(this); 
   }
 
-  //this.usd +  this.btc_val + this.eth_val +  this.xrp_val + this.ltc_val,
-
   //Pulls from API and saves prices. Calls reAvaluate function to start off
   getCryptoPrice() {
     var bitcoinPrice 
@@ -65,7 +63,6 @@ export default class BlockTrade extends React.Component {
           xrpPrice: data.data.RAW.XRP.USD.PRICE
         }
       })
-        // TODO: make component for rendering return this.tradeRate(this.state.coinCurrency.btcPrice, this.state.coinCurrency.ethPrice, this.state.coinCurrency.ltcPrice, this.state.coinCurrency.xrpPrice);
       }
     )
     .catch((error)=>{
@@ -109,13 +106,13 @@ export default class BlockTrade extends React.Component {
         userId: data.data.UserId,
         totalNet: parseFloat(data.data.totalNet.toFixed(2)),
         usd: parseFloat(data.data.usd.toFixed(2)),
-        btc: parseFloat(data.data.btc.toFixed(2)),
+        btc: parseFloat(data.data.btc.toFixed(6)),
         btc_val: parseFloat(data.data.btc_val.toFixed(2)),
-        eth: parseFloat(data.data.eth.toFixed(2)),
+        eth: parseFloat(data.data.eth.toFixed(6)),
         eth_val: parseFloat(data.data.eth_val.toFixed(2)),
-        xrp: parseFloat(data.data.xrp.toFixed(2)),
+        xrp: parseFloat(data.data.xrp.toFixed(6)),
         xrp_val: parseFloat(data.data.xrp_val.toFixed(2)),
-        ltc: parseFloat(data.data.ltc.toFixed(2)),
+        ltc: parseFloat(data.data.ltc.toFixed(6)),
         ltc_val: parseFloat(data.data.ltc_val.toFixed(2))
       }})
     });
@@ -128,13 +125,13 @@ export default class BlockTrade extends React.Component {
       userId: userPort.UserId,
       totalNet: parseFloat(userPort.totalNet.toFixed(2)),
       usd: parseFloat(userPort.usd.toFixed(2)),
-      btc: parseFloat(userPort.btc.toFixed(2)),
+      btc: parseFloat(userPort.btc.toFixed(6)),
       btc_val: parseFloat(userPort.btc_val.toFixed(2)),
-      eth: parseFloat(userPort.eth.toFixed(2)),
+      eth: parseFloat(userPort.eth.toFixed(6)),
       eth_val: parseFloat(userPort.eth_val.toFixed(2)),
-      xrp: parseFloat(userPort.xrp.toFixed(2)),
+      xrp: parseFloat(userPort.xrp.toFixed(6)),
       xrp_val: parseFloat(userPort.xrp_val.toFixed(2)),
-      ltc: parseFloat(userPort.ltc.toFixed(2)),
+      ltc: parseFloat(userPort.ltc.toFixed(6)),
       ltc_val: parseFloat(userPort.ltc_val.toFixed(2))
     }})
     console.log(this.state);
@@ -150,33 +147,37 @@ export default class BlockTrade extends React.Component {
   // getting original tradeHistory data to populate
   getTradeHistory(){
     axios.get("/api/tradeHistory").then((data) => {
-      this.setState({tradeHistory: [data]})
-      console.log(this.state.tradeHistory);
+      // console.log(data);
+      // console.log(data.data);
+      // console.log("tradeData");
+      // for(let trade of data.data){
+      //   console.log(trade);
+      // }
+      this.setState({tradeHistory: data.data})
+      // console.log(this.state.tradeHistory);
     });
   }
 
   newTrade(coinPrice, usdAmount, coinAmount, tradeType, cryptoType) {
-    usdAmount = Math.round(usdAmount * 100) / 100;
-    coinAmount = Math.round(coinAmount * 100) / 100;
+    // coinPrice = parseFloat(coinAmount.toFixed(4));
     console.log(arguments)
     // setting variables from inputs
     var newTrade = {
-      coinPrice,
-      cryptoType,
-      coinAmount,
-      usdAmount,
-      tradeType
-    };
-    function updateTradeHistory(newTrade) {
-      axios.post("/api/tradeHistory", newTrade).then(function(data) {
+      coinPrice: coinPrice,
+      cryptoType: cryptoType,
+      coinAmount: coinAmount,
+      usdAmount: usdAmount,
+      tradeType: tradeType
+    }
+    console.log(newTrade);
+    console.log("New trade data");
+    
+    axios.post("/api/tradeHistory", newTrade).then(function(data) {
         console.log(data);
       })
       .catch(function (error) {
         console.log(error);
       });
-    }
-    updateTradeHistory()
-    this.getTradeHistory;
 }
 
 
@@ -186,26 +187,34 @@ export default class BlockTrade extends React.Component {
     this.getTradeHistory();
   }
 
+  componentDidUpdate() {
+    this.getTradeHistory();
+  }
+
 
   render() {
 
     return(
         <div>
-      <UserData 
-        userPortfolio={this.state.userPortfolio}
-      />
-      <Graph />
-      <Trades 
-        coinCurrency={this.state.coinCurrency}
-        userPortfolio={this.state.userPortfolio} 
-        updatePort={this.updatePortfolio} 
-        tradeHistory={this.state.tradeHistory}
-        newTrade={this.newTrade}
-        updateApi={this.getCryptoPrice}
-      />
-      <TradeHistoryTable 
-        tradeHistory={this.state.tradeHistory} 
-      />
+          <div id="profileContainers">
+            <UserData 
+              userPortfolio={this.state.userPortfolio}
+            />
+            <Graph />
+            <Trades 
+              coinCurrency={this.state.coinCurrency}
+              userPortfolio={this.state.userPortfolio} 
+              updatePort={this.updatePortfolio} 
+              tradeHistory={this.state.tradeHistory}
+              newTrade={this.newTrade}
+              updateApi={this.getCryptoPrice}
+            />
+          </div>
+          <div id="tradeHistory">
+            <TradeHistoryTable 
+              tradeHistory={this.state.tradeHistory} 
+            />
+          </div>
     </div>
     )
   }

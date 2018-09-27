@@ -188,7 +188,7 @@ class Trades extends React.Component {
             </form>
             <form onSubmit={this.handleSubmit}>
               <input type="text" id="amount-xrp2" className="Sell" name="xrp" value={this.state.xrpSell}placeholder="Sell Amount (Coins)" onChange={this.handleChange}/>
-              <button type="button" className="sellButton" id="sellXRP">Sell</button>
+              <button type="submit" className="sellButton" id="sellXRP">Sell</button>
             </form>
           </div>
         </div>
