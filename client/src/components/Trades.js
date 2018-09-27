@@ -58,7 +58,7 @@ class Trades extends React.Component {
   }
 
   cryptoPurchase(cryptoType, amount){
-    amount = parseFloat(amount.toFixed(2))
+    amount = parseFloat(amount)
 
     // check to make sure it is now a number
     if(typeof amount == 'number'){
@@ -97,7 +97,7 @@ class Trades extends React.Component {
   }
 
   cryptoSell(cryptoType, amount){
-    amount = parseFloat(amount.toFixed(2))
+    amount = parseFloat(amount)
     var crypto = cryptoType + "Price"
     // setting amount of coins to amount selling multiplied by current crypto worth
     var coinWorth = amount * this.props.coinCurrency[crypto];
