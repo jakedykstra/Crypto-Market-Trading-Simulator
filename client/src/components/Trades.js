@@ -58,7 +58,7 @@ class Trades extends React.Component {
   }
 
   cryptoPurchase(cryptoType, amount){
-    amount = parseFloat(amount)
+    amount = parseFloat(amount.toFixed(2))
 
     // check to make sure it is now a number
     if(typeof amount == 'number'){
@@ -97,7 +97,7 @@ class Trades extends React.Component {
   }
 
   cryptoSell(cryptoType, amount){
-    amount = parseFloat(amount)
+    amount = parseFloat(amount.toFixed(2))
     var crypto = cryptoType + "Price"
     // setting amount of coins to amount selling multiplied by current crypto worth
     var coinWorth = amount * this.props.coinCurrency[crypto];
@@ -115,7 +115,7 @@ class Trades extends React.Component {
       // update api, userPort, and tradeHistory
       this.props.updateApi();
       this.props.updatePort(this.props.userPortfolio);
-      this.props.newTrade(this.props.coinCurrency[crypto], amount, coinWorth, "Sell", cryptoType)
+      this.props.newTrade(this.props.coinCurrency[crypto], coinWorth, amount, "Sell", cryptoType)
     }
     
   }

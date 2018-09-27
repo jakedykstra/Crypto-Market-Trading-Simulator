@@ -78,16 +78,30 @@ export default class BlockTrade extends React.Component {
 
   // function pulls portfolio data so we can render to the screen. If there is not portfolio data on user then we will call createPort to create one
   userPortfolio(userId){
-    axios.get("api/user/" + userId).then((userPortfolio) => {
-      console.log(userPortfolio);
-      var userPort = userPortfolio.data;
+    axios.get("api/user/" + userId).then((userPort) => {
+      console.log(userPort);
+      var userPortExists = userPort.data;
       // console.log(userPort);
       console.log("userPort userPortfolio");
-      if (!userPort) {
+      if (!userPortExists) {
         this.createPort(userId);
       } else {
-        console.log(userPort);
-        this.setState({userPortfolio: userPortfolio.data})
+        console.log(userPortExists);
+        console.log("Portfolio exists!");
+        this.setState({userPortfolio: {
+          userId: userPort.UserId,
+          totalNet: parseFloat(userPort.totalNet.toFixed(2)),
+          usd: parseFloat(userPort.usd.toFixed(2)),
+          btc: parseFloat(userPort.btc.toFixed(6)),
+          btc_val: parseFloat(userPort.btc_val.toFixed(2)),
+          eth: parseFloat(userPort.eth.toFixed(6)),
+          eth_val: parseFloat(userPort.eth_val.toFixed(2)),
+          xrp: parseFloat(userPort.xrp.toFixed(6)),
+          xrp_val: parseFloat(userPort.xrp_val.toFixed(2)),
+          ltc: parseFloat(userPort.ltc.toFixed(6)),
+          ltc_val: parseFloat(userPort.ltc_val.toFixed(2))
+          }
+        })
       } 
     });
   }
@@ -155,8 +169,6 @@ export default class BlockTrade extends React.Component {
   }
 
   newTrade(coinPrice, usdAmount, coinAmount, tradeType, cryptoType) {
-    // console.log(arguments)
-    // setting variables from inputs
     var newTrade = {
       coinPrice: coinPrice,
       cryptoType: cryptoType,
