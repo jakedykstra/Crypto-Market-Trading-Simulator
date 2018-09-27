@@ -2,7 +2,10 @@ var bCrypt = require("bcrypt-nodejs");
 
 module.exports = function(passport, user, db) {
   var User = user;
+  var JwtStrategy = require('passport-jwt').Strategy;
+  const ExtractJwt = require('passport-jwt').ExtractJwt;
   var LocalStrategy = require("passport-local").Strategy;
+
 
   //serialize
   passport.serializeUser(function(user, done) {
@@ -107,4 +110,35 @@ module.exports = function(passport, user, db) {
       }
     )
   );
+
+  
+// Setup options for JWT Strategy
+var jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  secretOrKey: process.env.PASSPORT_SECRET
+};
+
+
+// Create JWT strategy
+const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
+  // See if the user ID in the payload exists in our database
+  // If it does, call 'done' with that other
+  // otherwise, call done without a user object
+  db.User.findOne({
+    where: {
+      email: email
+    }
+  }).then(function(user) {
+    if (!user) {
+      return done(null, false, { message: "Email does not exist" });
+    }
+    if (user) {
+      done(null, user);
+}
+  });
+
+});
+
+passport.use(jwtLogin);
+
 };

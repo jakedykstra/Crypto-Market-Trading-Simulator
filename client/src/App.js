@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Landing from './src/Landing'
-import Login from './src/login/Login'
-import Signup from './src/login/Signup'
+import Landing from './components/Landing'
+import Login from './components/login/Login'
+import Signup from './components/login/Signup'
 import BlockTrade from './BlockTrade'
 
 export default class App extends Component {

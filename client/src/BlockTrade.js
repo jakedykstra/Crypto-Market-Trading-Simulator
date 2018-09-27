@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import './BlockTrade.css';
-import UserData from './src/UserData';
-import Graph from './src/graph/Graph'
-import TradeHistoryTable from './src/TradeHistoryTable';
-import Trades from './src/Trades';
+import UserData from './components/UserData';
+import Graph from './components/graph/Graph'
+import TradeHistoryTable from './components/TradeHistoryTable';
+import Trades from './components/Trades';
 import axios from 'axios';
-
-//api call to get coin currency
-//api call to get user reg
-// api call to get user port or create user port
 
 export default class BlockTrade extends React.Component {
   constructor(props){
@@ -53,9 +49,9 @@ export default class BlockTrade extends React.Component {
     var litecoinPrice 
     axios.get(
       "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD").then((data) => {
-        console.log(data);
-        console.log(data.data);
-        console.log(data.data.RAW);
+        // console.log(data);
+        // console.log(data.data);
+        // console.log(data.data.RAW);
         this.setState({coinCurrency: {
           btcPrice: data.data.RAW.BTC.USD.PRICE,
           ethPrice: data.data.RAW.ETH.USD.PRICE,
@@ -85,7 +81,7 @@ export default class BlockTrade extends React.Component {
     axios.get("api/user/" + userId).then((userPortfolio) => {
       console.log(userPortfolio);
       var userPort = userPortfolio.data;
-      console.log(userPort);
+      // console.log(userPort);
       console.log("userPort userPortfolio");
       if (!userPort) {
         this.createPort(userId);
@@ -100,7 +96,7 @@ export default class BlockTrade extends React.Component {
   createPort(userId){
     console.log("Creating Portfolio -------------");
     axios.get(`api/newPort/${userId}`).then((data) => {
-      console.log(" createPort user portfolio data " + data);
+      // console.log(" createPort user portfolio data " + data);
       console.log(data.data);
       this.setState({userPortfolio: {
         userId: data.data.UserId,
@@ -159,8 +155,7 @@ export default class BlockTrade extends React.Component {
   }
 
   newTrade(coinPrice, usdAmount, coinAmount, tradeType, cryptoType) {
-    // coinPrice = parseFloat(coinAmount.toFixed(4));
-    console.log(arguments)
+    // console.log(arguments)
     // setting variables from inputs
     var newTrade = {
       coinPrice: coinPrice,

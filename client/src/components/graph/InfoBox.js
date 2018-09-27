@@ -18,8 +18,8 @@ class InfoBox extends Component {
     if(this.props.coin == this.state.lastCoin){
       return
     } else {
-      this.setState({lastCoin: this.props.coin})
       const {data} = this.props;
+      console.log(data);
       const url = 'https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD';
 
       fetch(url).then(r => r.json())
@@ -35,7 +35,8 @@ class InfoBox extends Component {
             currentPrice: coinData.RAW[this.props.coin].USD.PRICE,
             monthChangeD: change.toLocaleString('us-EN',{ style: 'currency', currency: 'USD' }),
             monthChangeP: changeP.toFixed(2) + '%',
-            updatedAt: Date.now()
+            updatedAt: Date.now(),
+            lastCoin: this.props.coin
           })
         })
         .catch((e) => {
@@ -50,7 +51,7 @@ class InfoBox extends Component {
   }
 
   componentDidUpdate(){
-    this.getData();
+    setTimeout(() => this.getData(), 1500);
   }
 
   componentWillUnmount(){

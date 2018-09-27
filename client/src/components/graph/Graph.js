@@ -14,7 +14,8 @@ class Graph extends Component {
       hoverLoc: null,
       activePoint: null,
       coin: 'BTC',
-      currentCoin: 'Bitcoin'
+      currentCoin: 'Bitcoin',
+      lastCoin: ''
     }
   }
   handleChartHover(hoverLoc, activePoint){
@@ -29,11 +30,6 @@ class Graph extends Component {
     this.setState({
       coin: coin
     })
-    this.handleClick()
-  }
-
-  handleClick(){
-    this.getData();
     this.currentCoin();
   }
 
@@ -58,6 +54,9 @@ class Graph extends Component {
   }
 
   getData(){
+    if(this.state.coin == this.state.lastCoin){
+      return
+    } else {
     const url = 'https://min-api.cryptocompare.com/data/histoday?fsym=' + this.state.coin + '&tsym=USD&limit=90';
 
       fetch(url).then( data => data.json())
@@ -80,20 +79,28 @@ class Graph extends Component {
           console.log("sortedData is here ========");
           console.log(sortedData);
           this.setState({
+            lastCoin: this.state.coin,
             data: sortedData,
             fetchingData: false
           })
+          this.updateBox()
         })
         .catch((e) => {
           console.log(e);
         });
     }
-
-  componentDidMount(){      
-    this.getData();
   }
 
+  updateBox(){
+      return (
+        <InfoBox data={this.state.data} coin={this.state.coin}
+        />
+      )
+  }
+
+
   render() {
+    this.getData();
     return (
 
       <div className='container graphContainer'>
@@ -102,7 +109,7 @@ class Graph extends Component {
         </div>
         <div className='row'>
           { !this.state.fetchingData ?
-          <InfoBox data={this.state.data} coin={this.state.coin}/>
+          this.updateBox()
           : null }
         </div>
         <div className='row'>
