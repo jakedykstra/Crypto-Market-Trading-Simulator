@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DelayLink from '../helper/Delay';
 import axios from 'axios';
-import '../styles.css';
 
 export default class Signup extends Component {
   constructor(props){

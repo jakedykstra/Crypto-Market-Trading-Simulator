@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './styles.css';
 
 // displays the user's investments in ea crypto
 class Trades extends React.Component {

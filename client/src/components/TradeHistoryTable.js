@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import TableRow from './TableRow.js';
-import './styles.css';
 
 export default class TradeHistoryTable extends React.Component {
   constructor(props){

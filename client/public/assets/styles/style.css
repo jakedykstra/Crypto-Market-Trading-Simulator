@@ -1,20 +1,49 @@
-body, html {
+.App {
+    text-align: center;
+  }
+  
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+  
+  .App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .App-title {
+    font-size: 1.5em;
+  }
+  
+  .App-intro {
+    font-size: large;
+  }
+  
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  body, html {
     height: 100%;
     margin: 0px;
     font-family: Roboto Condensed,sans-serif;
     background-color: #232931;
     position: relative;
     
-}
-
-#splashDiv {
+  }
+  
+  #splashDiv {
     overflow: hidden;
     width: 100%;
     height: 370px;
-}
-
-#splashWrap {
-    background-image: url(../images/background.jpeg);
+  }
+  
+  #splashWrap {
+    background-image: url(assets/images/background.jpeg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,16 +53,16 @@ body, html {
     width: calc(100% + (4 * 6px));
     bottom: 6px;
     right: 6px;
-}
-
-#title {
+  }
+  
+  #title {
     color: #eeeeee;
     margin: 0px auto;
     max-width: 1280px;
     font-weight: 900;
-}
-
-#headWrap {
+  }
+  
+  #headWrap {
     background: #232931;
     height: 100px;
     display: flex;
@@ -42,21 +71,21 @@ body, html {
     justify-content: flex-start;
     z-index: 2; 
     width: 100%;
-}
-
-#headWrap > div {
+  }
+  
+  #headWrap > div {
     max-width: 1280px;
     margin: 0 auto;
     width: 100%;
-}
-
-#text-body {
+  }
+  
+  #text-body {
     background-color: #232931;
     width:100%;
     height:400px;
-}
-
-#getStarted {
+  }
+  
+  .login {
     cursor: pointer;
     font-family: Roboto Condensed,sans-serif;
     font-size: 25px;
@@ -70,13 +99,33 @@ body, html {
     height: 100px;
     position: absolute;
     top: 50%;
-    left: 41.5%;
+    left: 20%;
     z-index: 999;
     font-weight: bold;
     letter-spacing: 1px;
-}
-
-#description {
+  }
+  
+  .signup {
+    cursor: pointer;
+    font-family: Roboto Condensed,sans-serif;
+    font-size: 25px;
+    background: #232931;
+    text-align: center;
+    color: #eeeeee;
+    border: 5px;
+    border-style: solid;
+    border-color: #4ecca3;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    z-index: 999;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  #description {
     max-width: 1280px;
     height: 300px;
     border: 5px;
@@ -88,15 +137,15 @@ body, html {
     color: white;
     font-size: 20px;
     background-color: #393e46;
-}
-
-#main {
+  }
+  
+  #main {
     position: relative;
     border-top: 5px #4ecca3 solid; 
     border-bottom: 5px #4ecca3 solid; 
-}
-
-img {
+  }
+  
+  img {
     height: 75px;
     max-width: 75px;
     float: left;
@@ -105,15 +154,15 @@ img {
     margin-right: 25px;
     margin-bottom: 5px;
    
-}
-
-.index-header {
+  }
+  
+  .index-header {
     border-bottom: 5px;
     border-bottom-style: solid;
     border-bottom-color: #4ecca3;
-}
-
-#accountContainer {
+  }
+  
+  #accountContainer {
     display: inline-block;
     background: #393e46;
     width: 25%;
@@ -123,9 +172,9 @@ img {
     border: 5px;
     border-style: solid;
     border-color: #4ecca3;
-}
-
-#graphContainer {
+  }
+  
+  #graphContainer {
     display: inline-block;
     background: #393e46;
     width: 40%;
@@ -135,13 +184,13 @@ img {
     border: 5px;
     border-style: solid;
     border-color: #4ecca3;
-}
-
-#svg-container {
+  }
+  
+  #svg-container {
     background: #393e46;  
-}
-
-#tradeContainer {
+  }
+  
+  #tradeContainer {
     display: inline-block;
     background: #393e46;
     width: 25%;
@@ -151,9 +200,9 @@ img {
     border: 5px;
     border-style: solid;
     border-color: #4ecca3;
-}
-
-#tradeHistory {
+  }
+  
+  #tradeHistory {
     background: #393e46;
     margin-top: 0px;
     width: calc(100% - 83px);
@@ -165,38 +214,39 @@ img {
     border-color: #4ecca3;
     color: white;
     text-align: center;
-    overflow: hidden;
-}
-
-#tradeHistory h1 {
+    overflow: overlay;
+  }
+  
+  #tradeHistory h1 {
     margin: 10px;
-}
-
-a {
+  }
+  
+  a {
     text-decoration: none;
     color: #eeeeee;
-}
-
-#profileContainers {
+  }
+  
+  #profileContainers {
     height: 500px;
     display: flex;
     justify-content: center;
     margin: 10px;
     color: white;
-}
-
-.titleTab {
+  }
+  
+  .titleTab {
     border-bottom: 5px;
+    height: 40px;
     border-bottom-style: solid;
     border-bottom-color: #4ecca3;
-}
-
-.titleTab h1 {
+  }
+  
+  .titleTab h1 {
     font-size: 24x;
     margin: 0px 0px 0px 10px;
-}
-
-#coin {
+  }
+  
+  #coin {
     width: 100%;
     height: 110px;
     border-bottom: 5px;
@@ -206,90 +256,111 @@ a {
     align-content: center;
     align-items: center; 
     padding: 0;
-}
-
-#coin img {
+  }
+  
+  #coin img {
     margin-left: 20px;
     padding: 0;
-}
-
-.bitImage {
+  }
+  
+  .bitImage {
     height: 50px;
     width: 50px;
-}
-
-.price {
+  }
+  
+  .price {
     color: #70a800;
-}
-
-.priceImage {
+  }
+  
+  .priceImage {
     display: flex;
     align-items: center;
     width: 45%;
     float: left;
-}
-
-.inputFields {
+  }
+  
+  .inputFields {
     width: 55%;
     float: right;
-}
-
-input {
+  }
+  
+  input {
     margin: 7px;
     margin-left: 15px;
     background-color: #393e46;
     border-color: #4ecca3;
     color: white;
     text-align: center;
-}
-
-::placeholder {
+  }
+  
+  .text {
+    width: 400px;
+    margin-left: 135px;
+  }
+  
+  ::placeholder {
     color:white;
     opacity: .60;
     text-align: center;
-}
-
-.buyButton {
+  }
+  
+  #loginform {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .linkstyle {
+    color: #757575
+  }
+  
+  .btn-style {
+    color: #4ecca3;
+    width: 200px;
+    margin-left: 200px;
+  }
+  
+  .buyButton {
     color: white;
     background:rgb(18, 204, 18);
     font-family: Roboto Condensed,sans-serif;
     border-color: #4ecca3;
     cursor: pointer;
-}
-
-.sellButton {
+  }
+  
+  .sellButton {
     color: white;
     background: red;
     font-family: Roboto Condensed,sans-serif;
     border-color: #4ecca3;
     cursor: pointer;
-}
-
-.balances {
+  }
+  
+  .balances {
     border-bottom: 5px;
     border-bottom-style: solid;
     border-bottom-color: #4ecca3;
     font-size: 70%;
-}
-
-#cash {
+    height: 55px;
+  }
+  
+  #cash {
     color: rgb(18, 204, 18);
     margin-left: 15px;
     
-}
-
-#net {
+  }
+  
+  #net {
     color: #f1c506;
     margin-left: 15px;
     
-}
-
-#amount {
+  }
+  
+  #amount {
     float: right;
     margin-right: 120px;
-}
-
-#coinInvestment {
+  }
+  
+  #coinInvestment {
     width: 100%;
     height: 73.8px;
     border-bottom: 5px;
@@ -300,48 +371,51 @@ input {
     align-items: center; 
     padding: 0;
     
-}
-
-#investmentContainer {
-    display: block;
-}
-
-#coinInvestment img {
+  }
+  
+  #investmentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 355px;
+  }
+  
+  #coinInvestment img {
     margin-left: 20px;
-}
-
-.ripple {
+  }
+  
+  .ripple {
     margin-left: 50px;
     align-self: center;
     color: #009dd6;
-}
-
-.bitcoin {
+  }
+  
+  .bitcoin {
     margin-left: 50px;
     align-self: center;
     color: #f1c506;
-}
-
-.litecoin {
+  }
+  
+  .litecoin {
     margin-left: 50px;
     align-self: center;
     color: #bebebe;
-}
-
-.ethereum {
+  }
+  
+  .ethereum {
     margin-left: 50px;
     align-self: center;
     color: #0b0b0d;
-}
-
-#graphButtonContainer {
+  }
+  
+  #graphButtonContainer {
     display: flex;
     align-items: center;
     align-content: center;
     height: 38px;
-}
-
-.graphButton {
+  }
+  
+  .graphButton {
     width: 180px;
     margin: auto;
     font-family: Roboto Condensed,sans-serif;
@@ -350,52 +424,52 @@ input {
     border: none;
     height: 30px;
     cursor: pointer;
-}
-
-#graphBTC {
+  }
+  
+  #graphBTC {
     background-color: #f1c506;
-}
-
-#graphLTC {
+  }
+  
+  #graphLTC {
     background-color: #bebebe;
-}
-
-#graphETH {
+  }
+  
+  #graphETH {
     background-color: #0b0b0d;
-}
-
-#graphXRP {
+  }
+  
+  #graphXRP {
     background-color: #009dd6;
-}
-
-svg {
+  }
+  
+  svg {
     width: 690px;
-}
-
-.svg-container {
+  }
+  
+  .svg-container {
     display: flex;
     align-items: center;
     align-content: center;
     margin-bottom: 20px;
     height: 500px;
-}
-
-.history-table {
+  }
+  
+  .history-table {
     width: 100%;
-}
-
-.history-table th {
+  }
+  
+  .history-table th {
     border-bottom: 5px;
     border-bottom-style: solid;
     border-bottom-color: #4ecca3;
     width: 280px;
     margin: auto;
     font-weight: bold;
-}
-
-#loginRegister {
+  }
+  
+  #loginRegister {
     height: 340px;
-    width: 500px;
+    width: 700px;
     border: 5px;
     border-style: solid;
     border-color: #4ecca3;
@@ -405,9 +479,9 @@ svg {
     background-color: #393e46;
     margin-top: 80px;
     
-}
-
-#loginRegister h1 {
+  }
+  
+  #loginRegister h1 {
     text-align: center;
     border-bottom: 5px;
     border-bottom-style: solid;
@@ -416,17 +490,17 @@ svg {
     margin-top: 7.5px;
     margin-bottom: 15px;
     
-}
-
-.bothLogin {
+  }
+  
+  .bothLogin {
     margin-left: 110px;
-}
-
-#username {
+  }
+  
+  #username {
     margin-top: 30px;
-}
-
-.loginButton {
+  }
+  
+  .loginButton {
     cursor: pointer;
     font-family: Roboto Condensed,sans-serif;
     font-size: 18px;
@@ -440,40 +514,41 @@ svg {
     height: 75px;
     font-weight: bold;
     letter-spacing: 1px;
-}
-
-#indexRegister {
+  }
+  
+  #indexRegister {
     float: left;
     margin-left: 85px;
-}
-
-#indexLogin {
+  }
+  
+  #indexLogin {
     float: right;
     margin-right: 85px;
-}
-
-#registerDiv {
+  }
+  
+  #registerDiv {
     display: block;
     width: 100%;
     height: 55px;
-}
-
-#password {
+  }
+  
+  #password {
     margin-bottom: 30px;
-}
-
-#emailInput {
+  }
+  
+  #emailInput {
     margin-left: 34px;
-}
-
-td {
+  }
+  
+  td {
     background-color: white;
     color: black;
     position: relative;
-}
-
-.history-table {
+  }
+  
+  .history-table {
     overflow: hidden;
     position: relative;
-}
-
+  }
+  
+  
