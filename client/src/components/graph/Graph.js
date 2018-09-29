@@ -27,25 +27,34 @@ class Graph extends Component {
 
   coinChange(coin){
     console.log(coin);
-    this.setState({
-      coin: coin
-    })
-    this.currentCoin();
+    this.currentCoin(coin);
   }
 
-  currentCoin(){
-    switch (this.state.coin) {
+  currentCoin(coin){
+    switch (coin) {
       case 'BTC':
-        this.setState({currentCoin : 'Bitcoin'})
+        this.setState({
+          currentCoin : 'Bitcoin',
+          coin: coin
+        })
         break;
       case 'ETH':
-        this.setState({currentCoin : 'Ethereum'})
+        this.setState({
+          currentCoin : 'Ethereum',
+          coin: coin
+        })
         break;
       case 'XRP':
-        this.setState({currentCoin : 'Ripple'})
+        this.setState({
+          currentCoin : 'Ripple',
+          coin: coin
+        })
         break;
       case 'LTC':
-        this.setState({currentCoin : 'LiteCoin'})
+        this.setState({
+          currentCoin : 'LiteCoin',
+          coin: coin
+        })
         break;
     
       default:
