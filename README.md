@@ -1,5 +1,5 @@
 <a href="https://project2-crypto.herokuapp.com/">
-    <img src="https://project2-crypto.herokuapp.com/assets/images/btlogo3.png" alt="BlockTrd logo" title="" align="right" height="60" />
+    <img src="./client/src/assets/images/btlogo3.png" alt="BlockTrd logo" title="" align="right" height="60" />
 </a>
 
 Cryptocurrency Simulator
@@ -20,5 +20,5 @@ Back-End implementation was handled by Aman, Jill and Jake
 #### Note: to run the repo you will need the follow:
 * to have a mysql server running
 * to install the npm packages for react/express package.jsons
-* to have a.env file with the db name/username/password
+* to have a .env file with the db name/username/password
 * to type to the cli "npm run dev"
