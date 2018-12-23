@@ -80,6 +80,7 @@ export default class BlockTrade extends React.Component {
   userPortfolio(userId){
     axios.get("api/user/" + userId).then((userPort) => {
       console.log(userPort);
+      console.log("userPort");
       var userPortExists = userPort.data;
       // console.log(userPort);
       console.log("userPort userPortfolio");

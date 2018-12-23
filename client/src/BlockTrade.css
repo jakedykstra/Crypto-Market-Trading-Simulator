@@ -198,6 +198,18 @@ img {
   width: 600px;
 }
 
+@media all and (max-width: 1450px) {
+  .chart svg {
+    width: 500px;
+  }
+}
+
+@media all and (max-width: 1250px) {
+  .chart svg {
+    width: 400px;
+  }
+}
+
 #graphContainer {
   display: inline-block;
   background: #393e46;
@@ -336,6 +348,25 @@ input {
   text-align: center;
   width: 68%;
   font-size: .6rem;
+}
+
+@media all and (max-width: 1250px) {
+  input {
+    width: 60%;
+    font-size: .5rem;
+  }
+  #cash, #net {
+    font-size: 1.15rem;
+  }
+  .price {
+    font-size: 1.1rem;
+  }
+}
+
+@media all and (max-width: 1060px) {
+  .price {
+    font-size: .9rem;
+  }
 }
 
 .text {
