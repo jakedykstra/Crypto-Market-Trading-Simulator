@@ -85,6 +85,9 @@ body, html {
   height:400px;
 }
 
+/* LOGIN  --------------------------------------------------------------------------------------------------------- */
+/*----------------------------------------------------------------------------------------------------------------- */
+
 .login {
   cursor: pointer;
   font-family: Roboto Condensed,sans-serif;
@@ -125,6 +128,23 @@ body, html {
   letter-spacing: 1px;
 }
 
+#loginform {
+  margin-top: 10%;
+}
+
+.email, .pass {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 17px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-right: 23px;
+}
+
 #description {
   max-width: 1280px;
   height: 300px;
@@ -151,7 +171,7 @@ img {
   float: left;
   display: flex;
   align-items: center;
-  margin-right: 25px;
+  margin-right: 10px;
   margin-bottom: 5px;
  
 }
@@ -174,6 +194,10 @@ img {
   border-color: #4ecca3;
 }
 
+.chart svg{
+  width: 600px;
+}
+
 #graphContainer {
   display: inline-block;
   background: #393e46;
@@ -184,6 +208,14 @@ img {
   border: 5px;
   border-style: solid;
   border-color: #4ecca3;
+}
+
+#data-container .heading {
+  font-size: 1.8rem;
+}
+
+#data-container .subtext {
+  font-size: .8rem;
 }
 
 #svg-container {
@@ -259,17 +291,18 @@ a {
 }
 
 #coin img {
-  margin-left: 20px;
+  margin-left: 10px;
   padding: 0;
 }
 
 .bitImage {
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
 }
 
 .price {
   color: #70a800;
+  font-size: 1.25rem;
 }
 
 .priceImage {
@@ -280,17 +313,29 @@ a {
 }
 
 .inputFields {
-  width: 55%;
-  float: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
+
+.inputFields form {
+  width: 98%;
+  margin-right: 2%;
+}
+
+/* .inputFields input {
+  max-width: 35%;
+} */
 
 input {
   margin: 7px;
-  margin-left: 15px;
   background-color: #393e46;
   border-color: #4ecca3;
   color: white;
   text-align: center;
+  width: 68%;
+  font-size: .6rem;
 }
 
 .text {
@@ -370,7 +415,7 @@ input {
   align-content: center;
   align-items: center; 
   padding: 0;
-  
+
 }
 
 #investmentContainer {
@@ -378,6 +423,7 @@ input {
   flex-direction: column;
   justify-content: space-between;
   height: 355px;
+  font-size: 0.83rem;
 }
 
 #coinInvestment img {
@@ -479,6 +525,10 @@ svg {
   background-color: #393e46;
   margin-top: 80px;
   
+}
+
+#loginRegister button {
+  position: relative;
 }
 
 #loginRegister h1 {

@@ -22,16 +22,9 @@
   color: #64B5F6;
 }
 
-#left {
-  margin-right: 48px;
-}
+
 
 #middle {
-  padding: 0 48px;
   border-left: 1px solid #DAE1E9;
   border-right: 1px solid #DAE1E9;
-}
-
-#right {
-  margin-left: 48px;
 }
