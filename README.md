@@ -18,7 +18,39 @@ Front-End React was handled by Riley, Dakokta, Jake
 Back-End implementation was handled by Aman, Jill and Jake
 
 #### Note: to run the repo you will need the follow:
-* to have a mysql server running
-* to install the npm packages for react/express package.jsons
-* to have a .env file with the db name/username/password
-* to type to the cli "npm run dev"
+First fork the files and install dependencies for the server and client package.json by running the following lines in your command line
+
+```
+npm i -g
+cd client
+npm i -g
+```
+
+Create a mysql file and link it to our sequelize ORM. We use dotenv here and I would advice you do the same, creating a .env file like below to link to everything. 
+
+```
+DB_HOST = yourHostName
+DB_PASS = yourDbPassWord
+DB_USER = yourDbUserName
+```
+
+Now make sure to run your MySQL DB then begin the servers
+
+```
+npm run dev 
+```
+
+## Authors
+
+* **Riley, Jake** - Front-End React
+* **Jill, Aman, Jake** - Back-End Routing and DB Connection
+
+## Built With
+
+* [React](https://reactjs.org/) - The front-end library used
+* [Sequelize](http://docs.sequelizejs.com/) - ORM used to communicate with MySQL
+* [MySQL](https://www.mysql.com/) - Our Database
+
+## Acknowledgments
+
+* Big shout out to the very helpful API we used from cryptocompare.com. Huge help here.
