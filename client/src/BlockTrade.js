@@ -1,10 +1,85 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './BlockTrade.css';
 import UserData from './components/UserData';
 import Graph from './components/graph/Graph'
 import TradeHistoryTable from './components/TradeHistoryTable';
 import Trades from './components/Trades';
 import axios from 'axios';
+
+function useCurrentCoinCurrency() {
+  const [coinCurrency, setCoinCurrency] = useState(
+    {
+    btcPrice: 0, 
+    ethPrice: 0,
+    ltcPrice: 0,
+    xrpPrice: 0
+  });
+
+  useEffect(() => {
+    axios.get(
+      "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD").then((data) => {
+        // console.log(data.data.RAW);
+        setCoinCurrency({
+          btcPrice: data.data.RAW.BTC.USD.PRICE,
+          ethPrice: data.data.RAW.ETH.USD.PRICE,
+          ltcPrice: data.data.RAW.LTC.USD.PRICE,
+          xrpPrice: data.data.RAW.XRP.USD.PRICE
+        })
+      }
+    )
+    .catch((error)=>{
+      console.log(error);
+   });
+  })
+}
+
+  // get userportfolio data on initial load
+  function useUserPortfolio(userId) {
+    const [userPort, setUserPort] = useState(
+      {
+        userId: 1,
+        totalNet: 10000,
+        usd: 10000,
+        btc: 0,
+        btc_val: 0,
+        eth: 0,
+        eth_val: 0,
+        xrp: 0,
+        xrp_val: 0,
+        ltc: 0,
+        ltc_val: 0
+    })
+      axios.get("api/user/" + userId).then((userPort) => {
+        var userPortExists = userPort.data;
+        if (!userPortExists) {
+          this.createPort(userId);
+        } else {
+          console.log(userPortExists);
+          console.log("Portfolio exists!");
+          this.setState({userPortfolio: {
+            userId: userPort.UserId,
+            totalNet: parseFloat(userPort.totalNet.toFixed(2)),
+            usd: parseFloat(userPort.usd.toFixed(2)),
+            btc: parseFloat(userPort.btc.toFixed(6)),
+            btc_val: parseFloat(userPort.btc_val.toFixed(2)),
+            eth: parseFloat(userPort.eth.toFixed(6)),
+            eth_val: parseFloat(userPort.eth_val.toFixed(2)),
+            xrp: parseFloat(userPort.xrp.toFixed(6)),
+            xrp_val: parseFloat(userPort.xrp_val.toFixed(2)),
+            ltc: parseFloat(userPort.ltc.toFixed(6)),
+            ltc_val: parseFloat(userPort.ltc_val.toFixed(2))
+            }
+          })
+        } 
+      });
+    }
+
+    // set new user portfolio data
+
+    // update user porfolio data
+
+    
+
 
 export default class BlockTrade extends React.Component {
   constructor(props){
