@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 
+export default function Landing() {
 
-export default class Landing extends Component {
-
-  render(){
     return (
       <div>
       <div id="headWrap">
@@ -18,7 +16,6 @@ export default class Landing extends Component {
           <div id="splashDiv">
             <div id="splashWrap" />
           </div>
-          {/* <h4>Get Started!</h4> */}
           <button className="login">
             <Link to="/login">Login</Link>
           </button>
@@ -44,5 +41,4 @@ export default class Landing extends Component {
         </div>
         </div>
     );
-  }
 };

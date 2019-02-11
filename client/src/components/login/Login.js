@@ -1,56 +1,44 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import DelayLink from '../helper/Delay';
 
-export default class Login extends Component {
-  constructor(props){
-    super(props)
-
-    this.state = {
+export default function Login(props){
+    
+    [info, setInfo] = useState({
       email: '',
       password: ''
-    }
+    });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
- signin(){
-    console.log(this.state);
+  signin = () => {
     axios.post("/api/login", {
-      email: this.state.email,
-      password: this.state.password
+      email: email,
+      password: password
     }).then((data) =>{
       console.log(data);
-      this.getUser();
+      getUser();
     })
   }
 
-  getUser(){
+  getUser = () => {
     axios.get("/api/dashboard").then(function(user){
-      console.log(user);
-      console.log(user.data.id);
     })
-
   }
 
-  handleChange(e){
+  handleChange = (e) => {
     console.log(e.target.value)
     console.log(e.target.name)
-    this.setState({[e.target.name] : e.target.value})
+    setInfo({...info, [e.target.name] : e.target.value})
   }
 
-  handleSubmit(e){
-    console.log(this.state)
-    this.signin(this.state)
-    this.setState({
+  handleSubmit = (e) => {
+    signin(state)
+    setInfo({
       email: '',
       password: ''
     })
   }
 
-  render() {
     return (
             <div>
             <div id="headWrap" className="titleTab">
@@ -69,20 +57,19 @@ export default class Login extends Component {
                 <form id="loginform" name="signin" method="post">
                   <div className="email">
                     <label className="label" htmlFor="email" name="uname">Email Address:</label>
-                    <input className="text" name="email" type="email" onChange={this.handleChange} value={this.state.email} />
+                    <input className="text" name="email" type="email" onChange={handleChange} value={info.email} />
                   </div>
                   <br></br>
                   <div className="pass">
                     <label className="label" htmlFor="password">Password:</label>
-                    <input className="text" name="password" type="password" onChange={this.handleChange} />
+                    <input className="text" name="password" type="password" onChange={handleChange} />
                   </div>
                   <div className="button">
-                      <button className="btn-style" type="submit" onClick={(e) => this.handleSubmit(e)} defaultValue="Sign In"><DelayLink className="linkstyle" to="/dashboard">Submit</DelayLink></button>
+                      <button className="btn-style" type="submit" onClick={(e) => handleSubmit(e)} defaultValue="Sign In"><DelayLink className="linkstyle" to="/dashboard">Submit</DelayLink></button>
                   </div>
                 </form>
               </div>
             </div>
           </div>
         );
-    };
   };

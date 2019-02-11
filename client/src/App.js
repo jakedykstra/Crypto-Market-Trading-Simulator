@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from './components/Landing'
 import Login from './components/login/Login'
 import Signup from './components/login/Signup'
-import BlockTrade from './BlockTrade'
+import Dashboard from './Dashboard'
 
 export default class App extends Component {
 
@@ -13,7 +13,7 @@ export default class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={Landing} />
-            <Route path="/Dashboard" component={BlockTrade} />
+            <Route path="/Dashboard" component={Dashboard} />
             <Route path="/Login" component={Login} />
             <Route path="/Signup" component={Signup} />
           </Switch>

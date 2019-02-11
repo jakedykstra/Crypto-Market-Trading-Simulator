@@ -1,28 +1,17 @@
-import React, { Component } from 'react';
-import TableRow from './TableRow.js';
+import React from 'react';
+import TableRow from '../TableRow.js';
 
-export default class TradeHistoryTable extends React.Component {
-  constructor(props){
-    super(props)
-  }
+export default function TradeHistoryTable (props) {
 
-  rowItems(){
-    // console.log(this.props.tradeHistory);
-    // console.log('-----------------------------');
-    var tradeHistoryArr = this.props.tradeHistory.reverse();
-    // console.log(tradeHistoryArr);
+  rowItems = () => {
+    var tradeHistoryArr = props.tradeHistory.reverse();
     return tradeHistoryArr.map(tradeRow => {
       return (
-        <TableRow
-          tradeHistory={this.props.tradeHistory}
-          key={tradeRow.id}
-          tradeRow={tradeRow}
-        />
+        TableRow(tradeHistory, tradeRow.id, tradeRow)
       );
     })
   }   
 
-  render() {
     return(
     <div>
         <div className="titleTab">
@@ -40,11 +29,10 @@ export default class TradeHistoryTable extends React.Component {
             </tr>
           </thead>
           <tbody className="body">
-          {this.rowItems()}
+          {rowItems()}
           </tbody>
         </table>
       </div>
-    );
-  }
+   );
 }
 

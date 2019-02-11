@@ -1,21 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
+import usePort from '../customHooks/usePortfolio';
 
-export default class UserData extends React.Component {
-  constructor(props) {
-    super(props);
-
-    }
-  render() {
-
+export default function UserData(props){
+    userPort = usePort();
     return( 
         <div id="accountContainer">
           <div className="titleTab">
             <h1>Account</h1>
           </div>
           <div className="balances">
-            <h1 id="cash">Current Cash Balance: ${this.props.userPortfolio.usd}
+            <h1 id="cash">Current Cash Balance: ${userPort.usd}
             </h1>
-            <h1 id="net">Portfolio Networth: ${this.props.userPortfolio.totalNet}
+            <h1 id="net">Portfolio Networth: ${userPort.totalNet}
             </h1>
           </div>
           <div className="titleTab">
@@ -24,24 +20,23 @@ export default class UserData extends React.Component {
           <div id="investmentContainer">
             <div className="bitInvestment" id="coinInvestment">
               <img className="bitImage" src="assets/images/bitcoin.png" />
-              <h1 className="bitcoin">{this.props.userPortfolio.btc} BTC / ${this.props.userPortfolio.btc_val}</h1>
+              <h1 className="bitcoin">{userPort.btc} BTC / ${userPort.btc_val}</h1>
             </div>
             <div className="liteInvestment" id="coinInvestment">
               <img className="bitImage" src="assets/images/litecoin.png" />
-              <h1 className="litecoin">{this.props.userPortfolio.ltc} LTC / ${this.props.userPortfolio.ltc_val}</h1>
+              <h1 className="litecoin">{userPort.ltc} LTC / ${userPort.ltc_val}</h1>
             </div>
             <div className="ethereumInvestment" id="coinInvestment">
               <img className="bitImage" src="assets/images/ethereum.png" />
-              <h1 className="ethereum">{this.props.userPortfolio.eth} ETH / ${this.props.userPortfolio.eth_val}</h1>
+              <h1 className="ethereum">{userPort.eth} ETH / ${userPort.eth_val}</h1>
             </div>
             <div className="rippleInvestment" id="coinInvestment">
               <img className="bitImage" src="assets/images/ripple.png" />
-              <h1 className="ripple">{this.props.userPortfolio.xrp} XRP / ${this.props.userPortfolio.xrp_val}</h1>
+              <h1 className="ripple">{userPort.xrp} XRP / ${userPort.xrp_val}</h1>
             </div>
           </div>
         </div>
     )
   };
-}
 
 
