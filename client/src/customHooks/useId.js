@@ -2,19 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
   
   // gets our users id
-export default userId = (userId) => {
-  const [userId, setUserId] = useState(null);
+export default function userId(props) {
+  const [userId, setUserId] = useState();
 
-    const getId = async = () => {
-      await axios.get("/api/user").then((user) => {
-      return user;
-  });
-}
+  const updateId = (props) => setUserId(props);
 
   useEffect(() => {
-    setUserId(getId());
-  }, userId);
+    axios.get("/api/user").then((user) => {
+    });
+  }, []);
 
-
-  return userId
+  return [userId, updateId];
 }

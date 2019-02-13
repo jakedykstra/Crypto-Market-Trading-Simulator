@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function TableRow(props) {
+export default function TableRow(tradeRow) {
       return (
         <tr>
           <td>{tradeRow.id}</td>

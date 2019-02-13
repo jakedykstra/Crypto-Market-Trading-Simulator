@@ -4,23 +4,22 @@ import useId from './customHooks/useId';
 import './BlockTrade.css';
 import UserData from './components/UserData';
 import Graph from './components/graph/Graph'
-import TradeHist from './components/tradeHist/tradeHist';
+import TradeHist from './components/tradeHist/TradeHist';
 import Trades from './components/Trades';
 import axios from 'axios';
 
 // initial start to program, calls for portfolio state and if null starts portfolio
+export default function Dashboard() {
+const [userId, updateUserId] = useId(); 
 
-function Dashboard() {
-const userId = useId();
-
-checkDBForPortfolio = () => {
+const checkDBForPortfolio = () => {
   if (usePort(userId) === null) {
     newUserPortfolio();
   };
 }
 
 // creates new user portfolio
-newUserPortfolio = () => {
+const newUserPortfolio = () => {
   const initalPort = {
     userId: 1,
     totalNet: 10000,
@@ -37,7 +36,7 @@ newUserPortfolio = () => {
   setDbPortfolio(initalPort)
 }
 
-setDbPortfolio = (port) => {
+const setDbPortfolio = (port) => {
   axios.post(`api/user/${userId}`, port).then((data) => {
     console.log(data);
     return data;
@@ -47,13 +46,19 @@ setDbPortfolio = (port) => {
 
 
   // function pulls portfolio data so we can render to the screen. If there is not portfolio data on user then we will call createPort to create one
-updateDbPortfolio = (userId) => {
-  
+const updateDbPortfolio = (userPort) => {
+  userPort.totalNet = userPort.usd +  userPort.btc_val + userPort.eth_val +  userPort.xrp_val + userPort.ltc_val
+  axios.put("/api/user/updatePortfolio", this.state.userPortfolio).then(function(data) {
+    console.log(data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 }
   
 
    // updates portfolio with new data based on recent buy. Function is called after buy/sell functionality
-updatePortfolio = (userPort) => {
+const updatePortfolio = (userPort) => {
     userPort.totalNet = userPort.usd +  userPort.btc_val + userPort.eth_val +  userPort.xrp_val + userPort.ltc_val
     axios.put("/api/user/updatePortfolio", this.state.userPortfolio).then(function(data) {
       console.log(data);
@@ -68,17 +73,9 @@ updatePortfolio = (userPort) => {
           <div id="profileContainers">
             {UserData()}
             <Graph />
-            <Trades 
-              coinCurrency={this.state.coinCurrency}
-              userPortfolio={this.state.userPortfolio} 
-              updatePort={this.updatePortfolio} 
-              tradeHistory={this.state.tradeHistory}
-              newTrade={this.newTrade}
-              updateApi={this.getCryptoPrice}
-            />
+            <Trades />
           </div>
-          {tradeHist()}
+          {TradeHist()}
     </div>
     )
-
 };

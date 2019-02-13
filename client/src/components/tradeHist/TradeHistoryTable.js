@@ -1,13 +1,16 @@
 import React from 'react';
-import TableRow from '../TableRow.js';
+import TableRow from './TableRow.js';
 
 export default function TradeHistoryTable (props) {
 
-  rowItems = () => {
-    var tradeHistoryArr = props.tradeHistory.reverse();
+  const rowItems = (props) => {
+    if (!props) {
+      return;
+    }
+    let tradeHistoryArr = props.reverse();
     return tradeHistoryArr.map(tradeRow => {
       return (
-        TableRow(tradeHistory, tradeRow.id, tradeRow)
+        TableRow(tradeRow)
       );
     })
   }   
@@ -29,7 +32,7 @@ export default function TradeHistoryTable (props) {
             </tr>
           </thead>
           <tbody className="body">
-          {rowItems()}
+          {rowItems(props)}
           </tbody>
         </table>
       </div>

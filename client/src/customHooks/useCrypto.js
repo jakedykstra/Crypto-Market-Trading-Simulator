@@ -5,19 +5,19 @@ export default function useCurrentCoinCurrency() {
   const [coinCurrency, setCoinCurrency] = useState(0);
 
   useEffect(() => {
-    axios.get(
+    (async => {
+      console.log("calling");
+      const response =  axios.get(
       "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH,XRP,LTC&tsyms=USD").then((data) => {
         setCoinCurrency({
-          btcPrice: data.data.RAW.BTC.USD.PRICE,
-          ethPrice: data.data.RAW.ETH.USD.PRICE,
-          ltcPrice: data.data.RAW.LTC.USD.PRICE,
-          xrpPrice: data.data.RAW.XRP.USD.PRICE
+          ethPrice: response.data.RAW.ETH.USD.PRICE,
+          ltcPrice: response.data.RAW.LTC.USD.PRICE,
+          btcPrice: response.data.RAW.BTC.USD.PRICE,
+          xrpPrice: response.data.RAW.XRP.USD.PRICE
         })
+      })
       }
-    )
-    .catch((error)=>{
-      console.log(error);
-    });
+    )();
   })
   
   return coinCurrency

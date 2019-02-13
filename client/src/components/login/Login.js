@@ -5,34 +5,34 @@ import DelayLink from '../helper/Delay';
 
 export default function Login(props){
     
-    [info, setInfo] = useState({
+   const [info, setInfo] = useState({
       email: '',
       password: ''
     });
 
-  signin = () => {
+  const signin = () => {
     axios.post("/api/login", {
-      email: email,
-      password: password
+      email: info.email,
+      password: info.password
     }).then((data) =>{
       console.log(data);
       getUser();
     })
   }
 
-  getUser = () => {
+  const getUser = () => {
     axios.get("/api/dashboard").then(function(user){
     })
   }
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     console.log(e.target.value)
     console.log(e.target.name)
     setInfo({...info, [e.target.name] : e.target.value})
   }
 
-  handleSubmit = (e) => {
-    signin(state)
+  const handleSubmit = (e) => {
+    signin(info);
     setInfo({
       email: '',
       password: ''

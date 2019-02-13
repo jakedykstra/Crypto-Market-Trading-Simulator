@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-starterTrans = {
+const starterTrans = {
   btcBuy: '',
   btcSell: '',
   ethBuy: '',
@@ -15,9 +15,13 @@ starterTrans = {
 };
 
 export default function useTransaction(props) {
-  [transaction, setTransaction] = useState(starterTrans)
+  const [transaction, setTransaction] = useState(starterTrans);
 
-  setTransaction({...transaction, props})
+  useEffect(() => {
+    setTransaction({...transaction, props});
+    console.log(transaction);
+    
+  }, props)
 
   return transaction;
 }

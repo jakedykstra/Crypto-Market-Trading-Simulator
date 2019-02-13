@@ -2,7 +2,7 @@ import React from 'react';
 import usePort from '../customHooks/usePortfolio';
 
 export default function UserData(props){
-    userPort = usePort();
+    const userPort = usePort();
     return( 
         <div id="accountContainer">
           <div className="titleTab">
